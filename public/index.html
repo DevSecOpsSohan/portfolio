@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sohan Dogra — DevSecOps Engineer</title>
-<meta name="description" content="DevSecOps engineer. Cloud infrastructure, CI/CD pipelines, and security automation.">
-<meta property="og:title" content="Sohan Dogra — DevSecOps Engineer">
-<meta property="og:description" content="DevSecOps engineer. Cloud infrastructure, CI/CD pipelines, and security automation.">
-<meta property="og:type" content="website">
+<title>Sohan Dogra — Platform &amp; DevOps Engineer</title>
+<meta name="description" content="Platform and DevOps engineer with 4+ years running production GitLab CI/CD, AWS, Kubernetes and GitOps at Publicis Sapient, Deutsche Telekom Digital Labs and OpsTree. AWS SAA and CKA certified.">
+<meta property="og:title" content="Sohan Dogra — Platform &amp; DevOps Engineer">
+<meta property="og:description" content="4+ years running production GitLab CI/CD, AWS, Kubernetes and GitOps. AWS SAA and CKA certified.">
+<meta property="og:type" content="profile">
+<meta name="theme-color" content="#0a0b0d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,110 +16,228 @@
 </head>
 <body>
 
-<div class="wrap">
+<nav>
+  <div class="wrap">
+    <a href="#top" class="brand">Sohan Dogra</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
 
   <header>
-    <h1>Sohan Dogra</h1>
-    <!-- TODO: title inferred from your GitHub handle. Correct it if wrong. -->
-    <p class="role">DevSecOps Engineer</p>
+    <span class="badge"><span class="dot"></span> Open to remote · Immediate joiner</span>
+
+    <div class="id-row">
+      <img src="/avatar.jpg" alt="Sohan Dogra" class="avatar" id="avatar">
+      <div>
+        <h1>Sohan Dogra</h1>
+        <p class="role">Platform &amp; DevOps Engineer</p>
+        <p class="loc">Faridabad, India</p>
+      </div>
+    </div>
+
     <p class="summary">
-      <span class="todo">TODO</span>
-      Two or three lines on what you do, what you specialise in, and what you
-      are looking for. This is the only paragraph most visitors will read
-      &mdash; make it concrete.
+      I own platforms, not just pipelines. Four years building production GitLab CI/CD
+      at scale — runner fleets tuned at the OS level, reusable pipeline templates other
+      teams build on, and security gates that run on every commit. Deep hands-on work
+      across AWS, Kubernetes, Terraform and Argo CD GitOps, including production EKS
+      upgrades with minimal downtime and multi-account governance via Control Tower and SCPs.
     </p>
+
     <nav class="links">
+      <a href="https://www.linkedin.com/in/devopsspecialist/">LinkedIn</a>
       <a href="https://github.com/DevSecOpsSohan">GitHub</a>
-      <!-- TODO: replace with your real LinkedIn URL -->
-      <a href="#" data-todo>LinkedIn</a>
       <a href="mailto:sohandogra703@gmail.com">Email</a>
-      <!-- TODO: link your CV, e.g. /cv.pdf placed in public/ -->
-      <a href="#" data-todo>Résumé</a>
+      <a href="/Sohan_Dogra_Resume.pdf">Résumé</a>
     </nav>
+
+    <div class="stats">
+      <div class="stat"><b>4+</b><span>Years in platform &amp; DevOps</span></div>
+      <div class="stat"><b>30%</b><span>Cloud spend reduced</span></div>
+      <div class="stat"><b>2</b><span>Active certifications</span></div>
+      <div class="stat"><b>~25h</b><span>Audit hours saved monthly</span></div>
+    </div>
   </header>
 
-  <section id="projects">
-    <h2>Projects</h2>
+  <section id="experience" class="reveal">
+    <h2>Experience</h2>
 
-    <article class="project">
-      <h3><a href="https://github.com/DevSecOpsSohan/repurpose-ai">repurpose-ai</a></h3>
-      <p>
-        Turns one long-form transcript into a week of platform-native posts &mdash;
-        clip picks with hooks, captions for each network, thumbnail copy and a
-        posting schedule. The Zod schema doubles as the model output contract,
-        so the API returns typed data rather than prose to parse.
-      </p>
-      <div class="tags">
-        <span class="tag">Next.js 16</span>
-        <span class="tag">TypeScript</span>
-        <span class="tag">Claude API</span>
-        <span class="tag">Cloudflare Workers</span>
-      </div>
-    </article>
+    <div class="job now">
+      <h3>Senior Associate — Infrastructure, Platform Engineering</h3>
+      <div class="co">Publicis Sapient · Gurgaon</div>
+      <div class="when">Sep 2025 – Present</div>
+      <ul>
+        <li>Own GitOps delivery for backend services on Argo CD, standardising promotion across environments and removing manual per-environment configuration for client-facing platforms.</li>
+        <li>Authored reusable Helm charts and an App-of-Apps architecture so product teams onboard services self-service — cutting config drift and platform-team ticket load.</li>
+        <li>Built a DevSecOps CI pipeline with SAST, Gitleaks and Trivy as shared reusable stages, shifting source, secret and container scanning left across every consuming repo.</li>
+        <li>Escalation point and SME for deployment failures, Helm templating and Argo CD sync errors across application and platform teams.</li>
+      </ul>
+    </div>
 
-    <article class="project">
-      <h3><span class="todo">TODO</span> Project name</h3>
-      <p>
-        What problem it solved, what you built, and the outcome. One or two
-        sentences. Numbers beat adjectives &mdash; "cut deploy time from 25 to 4
-        minutes" lands harder than "improved efficiency".
-      </p>
-      <div class="tags">
-        <span class="tag">tech</span>
-        <span class="tag">tech</span>
-      </div>
-    </article>
+    <div class="job">
+      <h3>DevOps Engineer — GitLab CI/CD &amp; Kubernetes Platform</h3>
+      <div class="co">Deutsche Telekom Digital Labs · Gurgaon</div>
+      <div class="when">Dec 2024 – Sep 2025</div>
+      <ul>
+        <li>Administered and tuned the GitLab Runner fleet at the Linux OS level, resolving contention and resource bottlenecks to materially improve pipeline throughput across shared CI capacity.</li>
+        <li>Planned and executed production Amazon EKS upgrades with minimal downtime — owning workload validation, rollback readiness and service-availability verification end to end.</li>
+        <li>Implemented Istio service mesh with Argo CD canary deployments for progressive delivery, traffic shaping and rapid rollback on production microservices.</li>
+        <li>Integrated MobSF and OWASP ZAP DAST into GitLab pipelines, extending automated security coverage without slowing release cadence.</li>
+      </ul>
+    </div>
 
-    <article class="project">
-      <h3><span class="todo">TODO</span> Project name</h3>
-      <p>Same again. Three or four strong projects beats ten weak ones.</p>
-      <div class="tags">
-        <span class="tag">tech</span>
-      </div>
-    </article>
+    <div class="job">
+      <h3>DevOps Specialist — Cloud Platform, IaC &amp; Governance</h3>
+      <div class="co">OpsTree Solutions · Noida</div>
+      <div class="when">Apr 2022 – Dec 2024</div>
+      <ul>
+        <li>Established AWS Control Tower landing zones, Service Control Policies and IAM Identity Center SSO across a multi-account estate — owning access control and account structure, not just build automation.</li>
+        <li>Built Terraform provisioning pipelines driven from GitLab CI/CD, automating repeatable infrastructure delivery across AWS and GCP.</li>
+        <li>Delivered cloud optimisation work that cut spend by 30% while building secure AWS foundations for development and production.</li>
+        <li>Developed reusable Ansible roles with dynamic inventory and Molecule test coverage; automated compliance checks saving ~25 audit hours per month.</li>
+      </ul>
+    </div>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="reveal">
     <h2>Skills</h2>
     <div class="skills">
-      <div class="skill-group">
-        <h3>Cloud &amp; Infrastructure</h3>
-        <p><span class="todo">TODO</span> AWS, Terraform, Kubernetes&hellip;</p>
+      <div class="sk">
+        <h3>GitLab Platform</h3>
+        <div class="tags">
+          <span class="tag">CI/CD architecture</span><span class="tag">Runner fleet tuning</span>
+          <span class="tag">Reusable templates</span><span class="tag">Approval gates</span>
+          <span class="tag">Secrets handling</span>
+        </div>
       </div>
-      <div class="skill-group">
-        <h3>CI/CD</h3>
-        <p><span class="todo">TODO</span> Jenkins, GitHub Actions, ArgoCD&hellip;</p>
+      <div class="sk">
+        <h3>Cloud &amp; Governance</h3>
+        <div class="tags">
+          <span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">GCP / GKE</span>
+          <span class="tag">Control Tower</span><span class="tag">SCPs</span>
+          <span class="tag">IAM Identity Center</span>
+        </div>
       </div>
-      <div class="skill-group">
-        <h3>Security</h3>
-        <p><span class="todo">TODO</span> SAST/DAST, secrets management&hellip;</p>
+      <div class="sk">
+        <h3>Infrastructure as Code</h3>
+        <div class="tags">
+          <span class="tag">Terraform</span><span class="tag">Ansible</span>
+          <span class="tag">Helm</span><span class="tag">Molecule</span>
+        </div>
       </div>
-      <div class="skill-group">
-        <h3>Languages</h3>
-        <p><span class="todo">TODO</span> Python, Bash, TypeScript&hellip;</p>
+      <div class="sk">
+        <h3>Kubernetes &amp; GitOps</h3>
+        <div class="tags">
+          <span class="tag">Argo CD</span><span class="tag">App-of-Apps</span>
+          <span class="tag">Istio</span><span class="tag">Canary delivery</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="sk">
+        <h3>Security &amp; DevSecOps</h3>
+        <div class="tags">
+          <span class="tag">SAST / DAST</span><span class="tag">Trivy</span>
+          <span class="tag">Gitleaks</span><span class="tag">SonarQube</span>
+          <span class="tag">OWASP ZAP</span><span class="tag">MobSF</span>
+        </div>
+      </div>
+      <div class="sk">
+        <h3>Observability &amp; Languages</h3>
+        <div class="tags">
+          <span class="tag">Prometheus</span><span class="tag">Grafana</span>
+          <span class="tag">ELK</span><span class="tag">Python</span>
+          <span class="tag">Bash</span><span class="tag">Linux</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="about">
-    <h2>About</h2>
-    <p class="summary">
-      <span class="todo">TODO</span>
-      A short paragraph with some personality. Where you are based, how you got
-      into this, what you are learning right now. Keep it human &mdash; this is
-      the part that makes someone reply.
-    </p>
+  <section id="projects" class="reveal">
+    <h2>Projects</h2>
+    <article class="project">
+      <h3><a href="https://github.com/DevSecOpsSohan/repurpose-ai">repurpose-ai</a></h3>
+      <p>
+        Turns one long-form transcript into a week of platform-native posts — clip picks
+        with hooks, per-network captions, thumbnail copy and a posting schedule. The Zod
+        schema doubles as the model output contract, so the API returns typed data instead
+        of prose to parse. Runs on Cloudflare Workers with a deliberately minimal binding
+        footprint.
+      </p>
+      <div class="tags">
+        <span class="tag">Next.js</span><span class="tag">TypeScript</span>
+        <span class="tag">Claude API</span><span class="tag">Cloudflare Workers</span>
+      </div>
+    </article>
+  </section>
+
+  <section id="certifications" class="reveal">
+    <h2>Certifications &amp; Education</h2>
+    <div class="certs">
+      <div class="cert">
+        <div class="mark">AWS</div>
+        <div><b>Solutions Architect – Associate</b><span>Active</span></div>
+      </div>
+      <div class="cert">
+        <div class="mark">K8s</div>
+        <div><b>Certified Kubernetes Administrator</b><span>Active</span></div>
+      </div>
+      <div class="cert">
+        <div class="mark">BSc</div>
+        <div><b>Bachelor of Computer Science</b><span>Tilak Maharashtra Vidyapeeth, Pune · 2020–2023</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <p>
+        Open to remote platform and DevOps roles, available immediately.
+        Happy to talk about GitLab platform work, Kubernetes migrations or GitOps.
+      </p>
+      <div class="links">
+        <a href="mailto:sohandogra703@gmail.com">sohandogra703@gmail.com</a>
+        <a href="https://www.linkedin.com/in/devopsspecialist/">LinkedIn</a>
+        <a href="https://github.com/DevSecOpsSohan">GitHub</a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    &copy; <span id="year">2026</span> Sohan Dogra &middot;
-    <a href="https://github.com/DevSecOpsSohan/portfolio">Source</a>
+    <span>&copy; <span id="year">2026</span> Sohan Dogra</span>
+    <span><a href="https://github.com/DevSecOpsSohan/portfolio">Source on GitHub</a></span>
   </footer>
 
 </div>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Show initials if no avatar.jpg has been added yet.
+  const avatar = document.getElementById("avatar");
+  avatar.addEventListener("error", () => {
+    const fallback = document.createElement("div");
+    fallback.className = "avatar avatar-fallback";
+    fallback.textContent = "SD";
+    avatar.replaceWith(fallback);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    }
+  }, { rootMargin: "0px 0px -60px 0px" });
+
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 </script>
 
 </body>
