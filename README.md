@@ -54,27 +54,39 @@ Free. Workers AI allows 10,000 Neurons/day on the Free plan with **no paid
 overage** — it fails closed rather than billing. D1's free tier covers a
 contact form many times over. Static assets consume no Worker CPU.
 
-## Email (not yet active)
+## Email
 
-The enquiry form stores every submission to D1 first, then attempts email.
-Email needs a **verified sender domain** — true for both Cloudflare's
-`send_email` binding and Resend — so it stays dormant until a custom domain
-exists. The API reports whether email actually sent, and the UI only promises a
-confirmation when one did.
+Every enquiry is stored in D1 first, then email is attempted. Storage never
+depends on email working.
 
-Read stored enquiries meanwhile:
+**To turn on notification email — one command, no domain needed:**
 
 ```bash
-npx wrangler d1 execute portfolio-enquiries --remote \
-  --command "SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 20"
+npx wrangler secret put RESEND_API_KEY
 ```
 
-To turn email on once a domain is live:
+Sign up at [resend.com](https://resend.com) with `sohandogra703@gmail.com` and
+create an API key. Resend's sandbox sender (`onboarding@resend.dev`) delivers
+only to the account owner's own address — which is exactly where notifications
+go, so this works immediately.
+
+The **visitor acknowledgement** still needs a verified domain. Until then Resend
+returns 403 for it; that is expected and handled, and the UI does not promise a
+confirmation email that was not sent.
+
+Once a domain is verified in Resend:
 
 ```bash
-npx wrangler secret put RESEND_API_KEY   # resend.com, free tier
-npx wrangler secret put CONTACT_TO       # where enquiries land
-npx wrangler secret put RESEND_FROM      # Sohan Dogra <hello@yourdomain.com>
+npx wrangler secret put RESEND_FROM     # Sohan Dogra <hello@yourdomain.com>
+```
+
+`CONTACT_TO` defaults to `sohandogra703@gmail.com` in `src/contact.js` — it is
+already public on the contact page, so it is a constant rather than a secret.
+
+Read stored enquiries at any time:
+
+```bash
+npx wrangler d1 execute portfolio-enquiries --remote   --command "SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 20"
 ```
 
 ## Local development
