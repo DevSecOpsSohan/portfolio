@@ -5,7 +5,10 @@
   "compatibility_date": "2026-09-02",
   "assets": {
     "directory": "./public",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // Without this the asset router answers before the Worker runs, so the
+    // security headers set in src/index.js never reach a single HTML page.
+    "run_worker_first": true
   },
   "ai": {
     "binding": "AI"

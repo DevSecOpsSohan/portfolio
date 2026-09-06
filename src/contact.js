@@ -44,6 +44,10 @@ const CONTACT_TO = "sohandogra703@gmail.com";
 // a custom domain is verified, and visitor acknowledgements start working too.
 const DEFAULT_FROM = "Sohan Dogra Portfolio <onboarding@resend.dev>";
 
+// Where the WhatsApp ping goes. Already public on the contact page, so it is a
+// default rather than a secret — only WHATSAPP_APIKEY needs setting.
+const WHATSAPP_DEFAULT_TO = "+918287332760";
+
 const TAB = 9;
 const NEWLINE = 10;
 const SPACE = 32;
@@ -69,6 +73,19 @@ function clean(value, max) {
   return out.trim().slice(0, max);
 }
 
+/**
+ * Same, but for fields that are a single line by definition.
+ *
+ * A name carrying a line break ends up in the notification's subject line.
+ * Resend takes JSON and builds the headers itself, so this cannot inject a
+ * header today — but "the current transport happens to be safe" is a thin
+ * reason to pass a newline into a header position, and it costs one call to
+ * close off.
+ */
+function cleanLine(value, max) {
+  return clean(value, max).replace(/[\t\n]+/g, " ").trim();
+}
+
 async function sendViaResend(env, { to, subject, text, replyTo }) {
   const payload = { from: env.RESEND_FROM || DEFAULT_FROM, to: [to], subject, text };
   if (replyTo) payload.reply_to = replyTo;
@@ -85,6 +102,40 @@ async function sendViaResend(env, { to, subject, text, replyTo }) {
   if (!res.ok) {
     const detail = await res.text();
     throw new Error(`resend ${res.status}: ${detail.slice(0, 200)}`);
+  }
+}
+
+/**
+ * Ping Sohan's phone when an enquiry lands.
+ *
+ * Deliberately minimal: first name and subject only, never the enquirer's
+ * email, phone or message body. This routes through a third-party relay, and
+ * there is no reason to hand a stranger's contact details to an extra service
+ * when the purpose is only "go and look at your inbox". The full enquiry is in
+ * D1 and in the notification email.
+ *
+ * Enable with:
+ *   npx wrangler secret put WHATSAPP_APIKEY
+ *
+ * Optional override if the destination number ever changes:
+ *   npx wrangler secret put WHATSAPP_TO
+ */
+async function notifyWhatsApp(env, enquiry) {
+  const to = env.WHATSAPP_TO || WHATSAPP_DEFAULT_TO;
+  const text = `New portfolio enquiry from ${enquiry.first_name}${
+    enquiry.subject ? ` — ${enquiry.subject}` : ""
+  }. Details are in your email and in D1.`;
+
+  const url =
+    "https://api.callmebot.com/whatsapp.php" +
+    `?phone=${encodeURIComponent(to)}` +
+    `&text=${encodeURIComponent(text)}` +
+    `&apikey=${encodeURIComponent(env.WHATSAPP_APIKEY)}`;
+
+  const res = await fetch(url, { method: "GET" });
+  if (!res.ok) {
+    const detail = await res.text();
+    throw new Error(`callmebot ${res.status}: ${detail.slice(0, 200)}`);
   }
 }
 
@@ -145,11 +196,11 @@ export async function handleContact(request, env, rateLimited) {
   }
 
   const enquiry = {
-    first_name: clean(body?.first_name, LIMITS.first_name),
-    last_name: clean(body?.last_name, LIMITS.last_name),
-    email: clean(body?.email, LIMITS.email),
-    phone: clean(body?.phone, LIMITS.phone),
-    subject: clean(body?.subject, LIMITS.subject),
+    first_name: cleanLine(body?.first_name, LIMITS.first_name),
+    last_name: cleanLine(body?.last_name, LIMITS.last_name),
+    email: cleanLine(body?.email, LIMITS.email),
+    phone: cleanLine(body?.phone, LIMITS.phone),
+    subject: cleanLine(body?.subject, LIMITS.subject),
     message: clean(body?.message, LIMITS.message),
     ip_country: request.headers.get("CF-IPCountry") || null,
     created_at: new Date().toISOString(),
@@ -236,6 +287,16 @@ export async function handleContact(request, env, rateLimited) {
     }
   } else {
     console.log(`enquiry #${id} stored; RESEND_API_KEY not set, no email attempted`);
+  }
+
+  // 3. WhatsApp ping, also best-effort and also independent of the above — a
+  // relay outage must not lose an enquiry that is already safely stored.
+  if (env.WHATSAPP_APIKEY) {
+    try {
+      await notifyWhatsApp(env, enquiry);
+    } catch (err) {
+      console.error(`enquiry #${id} whatsapp ping failed:`, err?.message ?? err);
+    }
   }
 
   // The UI only promises the visitor a confirmation when one actually reached them.
