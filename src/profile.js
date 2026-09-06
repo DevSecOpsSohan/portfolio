@@ -211,6 +211,41 @@ export const profile = {
     },
   ],
 
+  /**
+   * Services Sohan takes on for teams. Kept in step with the Services section
+   * on the home page — the assistant should answer "can he help with X?" from
+   * the same list a visitor is reading.
+   */
+  services: [
+    {
+      name: "DevSecOps Transformation & Automation",
+      items: [
+        "Automated infrastructure and environments",
+        "CI/CD automation",
+        "DevSecOps and vulnerability detection automation",
+        "GitOps / JIRAOps and test automation",
+        "Deployment strategies",
+      ],
+    },
+    {
+      name: "Cloud Engineering & Modernisation",
+      items: [
+        "Cloud design and architecture advisory",
+        "Infrastructure modernisation and containerisation",
+        "Cloud security posture management",
+        "Cloud cost reduction",
+      ],
+    },
+    {
+      name: "Observability & Production Engineering",
+      items: ["Comprehensive observability setup", "Production engineering"],
+    },
+    {
+      name: "Application & Platform Security Management",
+      items: ["DevSecOps implementation", "Compliance readiness"],
+    },
+  ],
+
   principles: [
     {
       title: "Infrastructure as Code",
@@ -315,6 +350,11 @@ export function knowledgeBaseText() {
     lines.push(`    Approach: ${c.approach}`);
     lines.push(`    Stack: ${c.stack.join(", ")}`);
     lines.push(`    Outcome: ${c.outcome}`);
+  }
+
+  lines.push("\nSERVICES OFFERED:");
+  for (const sv of p.services) {
+    lines.push(`- ${sv.name}: ${sv.items.join("; ")}`);
   }
 
   lines.push("\nCLIENT DELIVERY PROJECTS:");

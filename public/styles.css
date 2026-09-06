@@ -842,3 +842,73 @@ nav .brand:hover .brand-img { border-color: var(--accent); }
 @media (max-width: 380px) {
   nav .brand span { display: none; }
 }
+
+/* ================= services ================= */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.svc {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 0 0 18px;
+  overflow: hidden;
+  transition: border-color .18s, transform .18s;
+}
+.svc:hover { border-color: var(--line-bright); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .svc:hover { transform: none; } }
+
+.svc-head {
+  background: linear-gradient(180deg, var(--accent-soft), transparent);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 16px 10px;
+}
+.svc-art { display: block; width: 100%; height: auto; }
+
+.svc h3 { margin: 16px 18px 8px; font-size: 1rem; line-height: 1.35; }
+.svc > p { margin: 0 18px; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+.svc-list {
+  margin: 14px 18px 0;
+  padding-left: 20px;
+  color: #b8bec9;
+  font-size: .88rem;
+}
+.svc-list li { margin-bottom: 6px; padding-left: 2px; }
+.svc-list li::marker { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+.svc-more {
+  margin: 16px 18px 0 18px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: .87rem;
+  font-weight: 500;
+}
+.svc-more span { display: inline-block; transition: transform .18s; }
+.svc:hover .svc-more span { transform: translateX(3px); }
+
+/* ---------- service illustration primitives ---------- */
+
+.a-box { fill: var(--panel); stroke: var(--line-bright); stroke-width: 1; }
+.a-box.on { fill: var(--accent-soft); stroke: rgba(74, 222, 128, .5); }
+.a-fill { fill: var(--accent-soft); }
+.a-cloud { fill: var(--accent-soft); stroke: none; }
+.a-stroke { stroke: var(--line-bright); stroke-width: 1.5; fill: none; }
+.a-stroke2 { stroke: rgba(74, 222, 128, .55); stroke-width: 1.5; fill: none; }
+.a-dash { stroke: var(--line-bright); stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
+.a-axis { stroke: var(--line); stroke-width: 1; fill: none; }
+.a-line { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.a-dot { fill: var(--accent); }
+.a-alert { fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: .55; }
+.a-tick { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.a-lock { fill: none; stroke: rgba(74, 222, 128, .7); stroke-width: 1.5; }
+.a-head { fill: var(--line-bright); }
+.a-t { fill: var(--accent); font-family: inherit; font-size: 10px; font-weight: 600; }

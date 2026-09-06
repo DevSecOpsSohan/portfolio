@@ -16,6 +16,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { ATMOON, AEROHUB, carousel } from "./diagrams.mjs";
+import { servicesGrid } from "./services.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://portfolio.sohandogra703.workers.dev";
@@ -195,6 +196,13 @@ pages.push({
       </ol>
     </div>
     <p class="note">Rollback is a git revert — the same path in reverse, not a separate runbook.</p>
+  </section>
+
+  <section class="reveal" id="services">
+    <h2>Services</h2>
+    <p class="lede">Four areas I take on for teams: modernising how software ships, reshaping cloud estates that grew organically, making production legible, and getting security and compliance into the pipeline rather than bolted on afterwards.</p>
+    <p class="note">Engagements usually start with a discovery pass over what actually runs today — the target design is worth more when it addresses real workloads rather than assumptions.</p>
+${servicesGrid()}
   </section>
 
   <section class="reveal">
