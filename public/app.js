@@ -28,6 +28,39 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
+/* ---------- floating widget open / close ---------- */
+
+const widget = document.querySelector(".widget");
+const panel = document.getElementById("chat-panel");
+const launcher = document.getElementById("chat-launcher");
+const closeBtn = document.getElementById("chat-close");
+
+function setOpen(open) {
+  widget.classList.toggle("open", open);
+  panel.hidden = !open;
+  launcher.setAttribute("aria-expanded", String(open));
+  if (open) {
+    document.getElementById("chat-input").focus();
+  } else {
+    launcher.focus();
+  }
+}
+
+launcher.addEventListener("click", () => setOpen(panel.hidden));
+closeBtn.addEventListener("click", () => setOpen(false));
+
+// "Ask Sohan's AI" in the hero and nav open the widget rather than jumping.
+document.querySelectorAll("[data-open-chat]").forEach((el) => {
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    setOpen(true);
+  });
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !panel.hidden) setOpen(false);
+});
+
 /* ---------- AI chat ---------- */
 
 const log = document.getElementById("chat-log");
@@ -65,7 +98,7 @@ function setBusy(state) {
   busy = state;
   send.disabled = state;
   input.disabled = state;
-  send.textContent = state ? "…" : "Ask";
+  // Don't touch textContent here — the send button holds an inline SVG icon.
 }
 
 async function ask(question) {

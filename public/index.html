@@ -29,7 +29,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#work">Engineering</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#ask">Ask AI</a></li>
+      <li><a href="#" data-open-chat>Ask AI</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -65,7 +65,7 @@
     </div>
 
     <nav class="links" aria-label="Primary">
-      <a href="#ask" class="primary">Ask Sohan's AI</a>
+      <a href="#" class="primary" data-open-chat>Ask Sohan's AI</a>
       <a href="#work">Explore my engineering</a>
       <a href="/Sohan_Dogra_Resume.pdf">Download résumé</a>
     </nav>
@@ -77,44 +77,6 @@
       <div class="stat"><b>~25h</b><span>Audit hours saved monthly</span></div>
     </div>
   </header>
-
-  <!-- ============ AI ASSISTANT ============ -->
-  <section id="ask" class="reveal">
-    <h2>Ask Sohan's AI</h2>
-
-    <div class="chat">
-      <div class="chat-head">
-        <div>
-          <b>Portfolio assistant</b>
-          <span>Answers only from Sohan's documented experience — it will say so when something isn't covered.</span>
-        </div>
-        <button type="button" id="mode-toggle" class="mode-btn" aria-pressed="false">
-          Interview me
-        </button>
-      </div>
-
-      <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation">
-        <div class="msg bot">
-          <p>Ask me about Sohan's experience, the platforms he's run, or how he approaches infrastructure. Or hit <b>Interview me</b> and I'll ask <em>you</em> DevOps questions instead.</p>
-        </div>
-      </div>
-
-      <div class="quick" id="quick">
-        <button type="button">Give me a 30-second summary</button>
-        <button type="button">What AWS experience does Sohan have?</button>
-        <button type="button">Tell me about his Kubernetes work</button>
-        <button type="button">What CI/CD tools has he used?</button>
-        <button type="button">Why should I interview Sohan?</button>
-      </div>
-
-      <form class="chat-form" id="chat-form">
-        <label for="chat-input" class="sr-only">Your question</label>
-        <input id="chat-input" type="text" autocomplete="off" maxlength="600"
-               placeholder="Ask anything about Sohan's experience…">
-        <button type="submit" id="chat-send">Ask</button>
-      </form>
-    </div>
-  </section>
 
   <!-- ============ EXPERIENCE ============ -->
   <section id="experience" class="reveal">
@@ -377,6 +339,77 @@
   "worksFor": { "@type": "Organization", "name": "Publicis Sapient" }
 }
 </script>
+
+<!-- ============ FLOATING AI ASSISTANT ============ -->
+<div class="widget">
+
+  <div class="chat-panel" id="chat-panel" hidden>
+    <div class="chat-head">
+      <div class="chat-id">
+        <span class="bot-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="16" height="12" rx="3"/>
+            <path d="M12 8V4"/><circle cx="12" cy="3" r="1.4"/>
+            <path d="M9 13v1.5M15 13v1.5"/>
+            <path d="M1.5 13v3M22.5 13v3"/>
+          </svg>
+        </span>
+        <div>
+          <b>Ask Sohan's AI</b>
+          <span>Answers only from documented experience</span>
+        </div>
+      </div>
+      <div class="chat-actions">
+        <button type="button" id="mode-toggle" class="mode-btn" aria-pressed="false">Interview me</button>
+        <button type="button" id="chat-close" class="icon-btn" aria-label="Close assistant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation">
+      <div class="msg bot">
+        <p>Ask me about Sohan's experience, the platforms he's run, or how he approaches infrastructure. Or hit Interview me and I'll ask you DevOps questions instead.</p>
+      </div>
+    </div>
+
+    <div class="quick" id="quick">
+      <button type="button">30-second summary</button>
+      <button type="button">AWS experience?</button>
+      <button type="button">Kubernetes work?</button>
+      <button type="button">CI/CD tools?</button>
+      <button type="button">Why interview Sohan?</button>
+    </div>
+
+    <form class="chat-form" id="chat-form">
+      <label for="chat-input" class="sr-only">Your question</label>
+      <input id="chat-input" type="text" autocomplete="off" maxlength="600" placeholder="Ask anything…">
+      <button type="submit" id="chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <button id="chat-launcher" class="launcher" aria-expanded="false" aria-controls="chat-panel">
+    <span class="launcher-ico" aria-hidden="true">
+      <svg class="ico-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="8" width="16" height="12" rx="3"/>
+        <path d="M12 8V4"/><circle cx="12" cy="3" r="1.4"/>
+        <path d="M9 13v1.5M15 13v1.5"/>
+        <path d="M1.5 13v3M22.5 13v3"/>
+      </svg>
+      <svg class="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </span>
+    <span class="launcher-label">Ask Sohan's AI</span>
+  </button>
+
+</div>
 
 <script src="/app.js" defer></script>
 </body>
