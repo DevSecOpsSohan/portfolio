@@ -66,7 +66,7 @@
     <nav class="links" aria-label="Primary">
       <a href="#work" class="primary">Explore my engineering</a>
       <a href="/Sohan_Dogra_Resume.pdf">Download résumé</a>
-      <a href="mailto:sohandogra703@gmail.com">Get in touch</a>
+      <a href="#contact">Get in touch</a>
     </nav>
 
     <div class="stats">
@@ -299,14 +299,76 @@
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="reveal">
     <h2>Contact</h2>
-    <div class="contact-card">
-      <p>Open to remote platform and DevOps roles, available immediately. Happy to talk about GitLab platform work, Kubernetes migrations or GitOps.</p>
-      <div class="links">
-        <a href="mailto:sohandogra703@gmail.com">sohandogra703@gmail.com</a>
-        <a href="tel:+918287332760">+91 82873 32760</a>
-        <a href="https://www.linkedin.com/in/devopsspecialist/">LinkedIn</a>
-        <a href="https://github.com/DevSecOpsSohan">GitHub</a>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p>Open to remote platform and DevOps roles, available immediately. Also happy to talk about consulting on GitLab platform work, Kubernetes migrations or GitOps.</p>
+        <dl class="contact-list">
+          <dt>Email</dt>
+          <dd><a href="mailto:sohandogra703@gmail.com">sohandogra703@gmail.com</a></dd>
+          <dt>Phone</dt>
+          <dd><a href="tel:+918287332760">+91 82873 32760</a></dd>
+          <dt>Location</dt>
+          <dd>Faridabad, India · open to remote</dd>
+          <dt>Elsewhere</dt>
+          <dd>
+            <a href="https://www.linkedin.com/in/devopsspecialist/">LinkedIn</a> ·
+            <a href="https://github.com/DevSecOpsSohan">GitHub</a>
+          </dd>
+        </dl>
       </div>
+
+      <form class="enquiry" id="enquiry-form" novalidate>
+        <h3>Start a project enquiry</h3>
+        <p class="form-lede">Tell me what you're working on. You'll get an acknowledgement straight away, and a personal reply within a couple of working days.</p>
+
+        <div class="row">
+          <div class="field">
+            <label for="first_name">First name <span aria-hidden="true">*</span></label>
+            <input id="first_name" name="first_name" type="text" maxlength="80" autocomplete="given-name" required>
+            <small class="err" data-err="first_name"></small>
+          </div>
+          <div class="field">
+            <label for="last_name">Last name <span aria-hidden="true">*</span></label>
+            <input id="last_name" name="last_name" type="text" maxlength="80" autocomplete="family-name" required>
+            <small class="err" data-err="last_name"></small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="email">Email <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" maxlength="200" autocomplete="email" required>
+            <small class="err" data-err="email"></small>
+          </div>
+          <div class="field">
+            <label for="phone">Phone <span class="opt">optional</span></label>
+            <input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel">
+            <small class="err" data-err="phone"></small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="subject">Subject <span class="opt">optional</span></label>
+          <input id="subject" name="subject" type="text" maxlength="140" placeholder="e.g. Kubernetes migration, CI/CD audit, contract role">
+        </div>
+
+        <div class="field">
+          <label for="message">What would you like to discuss? <span aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="5" maxlength="4000" required
+                    placeholder="A sentence or two about the project, timeline and what you need help with."></textarea>
+          <small class="err" data-err="message"></small>
+        </div>
+
+        <!-- Honeypot: hidden from people, tempting to bots. -->
+        <div class="hp" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" id="enquiry-send">Send enquiry</button>
+        <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 

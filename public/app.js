@@ -173,3 +173,70 @@ modeBtn.addEventListener("click", () => {
     );
   }
 });
+
+/* ---------- project enquiry form ---------- */
+
+const enquiryForm = document.getElementById("enquiry-form");
+
+if (enquiryForm) {
+  const status = document.getElementById("enquiry-status");
+  const submit = document.getElementById("enquiry-send");
+
+  function clearErrors() {
+    enquiryForm.querySelectorAll(".err").forEach((el) => (el.textContent = ""));
+    enquiryForm.querySelectorAll(".invalid").forEach((el) => el.classList.remove("invalid"));
+  }
+
+  function showFieldErrors(fields) {
+    for (const [name, msg] of Object.entries(fields || {})) {
+      const err = enquiryForm.querySelector(`[data-err="${name}"]`);
+      const input = enquiryForm.querySelector(`[name="${name}"]`);
+      if (err) err.textContent = msg;
+      if (input) input.classList.add("invalid");
+    }
+    const first = enquiryForm.querySelector(".invalid");
+    if (first) first.focus();
+  }
+
+  enquiryForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    clearErrors();
+    status.className = "form-status";
+    status.textContent = "";
+
+    const data = Object.fromEntries(new FormData(enquiryForm).entries());
+
+    submit.disabled = true;
+    submit.textContent = "Sending…";
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const out = await res.json();
+
+      if (!res.ok) {
+        status.className = "form-status bad";
+        status.textContent = out.error || "Something went wrong. Please try again.";
+        if (out.fields) showFieldErrors(out.fields);
+        return;
+      }
+
+      enquiryForm.classList.add("sent");
+      status.className = "form-status ok";
+      // Only promise a confirmation email when one actually went out.
+      status.textContent = out.emailed
+        ? "Thanks — your enquiry has been received. A confirmation is on its way to your inbox, and I'll reply personally within a couple of working days."
+        : "Thanks — your enquiry has been received and I'll reply personally within a couple of working days.";
+    } catch {
+      status.className = "form-status bad";
+      status.textContent =
+        "Couldn't reach the server. Please email sohandogra703@gmail.com directly.";
+    } finally {
+      submit.disabled = false;
+      submit.textContent = "Send enquiry";
+    }
+  });
+}

@@ -474,3 +474,59 @@ footer {
   .chat-panel { animation: none; }
   .launcher:hover { transform: none; }
 }
+
+/* ================= contact + enquiry form ================= */
+
+.contact-grid { display: grid; gap: 16px; }
+@media (min-width: 760px) { .contact-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; } }
+
+.contact-list { margin: 20px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: .9rem; }
+.contact-list dt { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; padding-top: 2px; }
+.contact-list dd { margin: 0; }
+
+.enquiry {
+  border: 1px solid var(--line); background: var(--panel);
+  border-radius: var(--radius); padding: 24px;
+}
+.enquiry h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.form-lede { margin: 0 0 20px; color: var(--muted); font-size: .89rem; }
+
+.row { display: grid; gap: 14px; }
+@media (min-width: 520px) { .row { grid-template-columns: 1fr 1fr; } }
+
+.field { margin-bottom: 14px; }
+.field label { display: block; margin-bottom: 6px; font-size: .84rem; font-weight: 500; }
+.field label span[aria-hidden] { color: var(--accent); }
+.field .opt { color: var(--muted); font-weight: 400; font-size: .78rem; }
+
+.field input, .field textarea {
+  width: 100%; font-family: inherit; font-size: .92rem; color: var(--text);
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 8px; padding: 10px 12px; outline: none;
+  transition: border-color .16s;
+}
+.field textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .65; }
+.field input:focus, .field textarea:focus { border-color: var(--accent); }
+.field input.invalid, .field textarea.invalid { border-color: #f87171; }
+
+.err { display: block; margin-top: 5px; color: #f87171; font-size: .78rem; min-height: 0; }
+.err:empty { display: none; }
+
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.enquiry > button[type="submit"] {
+  cursor: pointer; font-family: inherit; font-weight: 600; font-size: .92rem;
+  background: var(--accent); color: #08080a; border: none;
+  border-radius: 9px; padding: 12px 24px; transition: background .16s, opacity .16s;
+}
+.enquiry > button[type="submit"]:hover { background: var(--accent-dim); }
+.enquiry > button[type="submit"]:disabled { opacity: .5; cursor: default; }
+
+.form-status { margin: 14px 0 0; font-size: .88rem; }
+.form-status:empty { display: none; }
+.form-status.ok { color: var(--accent); }
+.form-status.bad { color: #f87171; }
+
+.enquiry.sent .row, .enquiry.sent .field, .enquiry.sent > button, .enquiry.sent .form-lede { display: none; }
+.enquiry.sent .form-status { font-size: .95rem; margin-top: 8px; }

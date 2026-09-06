@@ -1,4 +1,5 @@
 import { knowledgeBaseText } from "./profile.js";
+import { handleContact } from "./contact.js";
 
 /**
  * Portfolio Worker.
@@ -165,6 +166,13 @@ export default {
         return Response.json({ error: "Use POST." }, { status: 405 });
       }
       return handleAsk(request, env);
+    }
+
+    if (url.pathname === "/api/contact") {
+      if (request.method !== "POST") {
+        return Response.json({ error: "Use POST." }, { status: 405 });
+      }
+      return handleContact(request, env, rateLimited);
     }
 
     return env.ASSETS.fetch(request);

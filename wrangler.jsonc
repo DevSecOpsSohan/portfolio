@@ -10,6 +10,13 @@
   "ai": {
     "binding": "AI"
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-enquiries",
+      "database_id": "6832ff1f-b531-46e1-b41e-de374224cb6d"
+    }
+  ],
   "observability": {
     "enabled": true
   }
