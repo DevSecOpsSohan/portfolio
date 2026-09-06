@@ -717,3 +717,20 @@ h3.sub {
 .deliverables li::marker { color: var(--line-bright); }
 
 .contact-card h2.plain { margin-bottom: 8px; }
+
+/* ================= fixes ================= */
+
+/* The hidden attribute must win over any author display rule. Without this,
+   .chat-panel{display:flex} and .quick{display:flex} silently override the
+   browser default, so the panel rendered on load, the close button appeared
+   to do nothing, and the quick chips stayed visible in interview mode. */
+[hidden] { display: none !important; }
+
+/* Chat header on phones: the subtitle wrapped to three lines and shoved the
+   controls off-centre. The greeting in the log already makes the same point. */
+@media (max-width: 560px) {
+  .chat-id span { display: none; }
+  .chat-id b { font-size: .95rem; }
+  .chat-head { padding: 12px 14px; }
+  .mode-btn { padding: 7px 10px; font-size: .75rem; }
+}

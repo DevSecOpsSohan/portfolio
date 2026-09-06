@@ -195,15 +195,15 @@ export const profile = {
       stack: ["AWS", "Terraform", "Ansible", "AWS SSM", "Amazon EKS", "Istio", "Kubernetes RBAC", "Service Control Policies", "Prometheus", "Grafana", "EFK"],
     },
     {
-      name: "US EdTech group — multi-account landing zone and compliance re-architecture",
-      client: "US-based education technology group (name withheld under NDA)",
+      name: "Aerohub — multi-account landing zone and compliance re-architecture",
+      client: "Aerohub, India",
       description:
-        "Moved a US client from a flat AWS estate to an Organizations-based landing zone, segregating environments and business verticals into their own accounts under a governed OU structure so compliance and access boundaries follow the org chart rather than cutting across it.",
+        "Moved Aerohub from a flat AWS estate to an Organizations-based landing zone, segregating environments and business verticals into their own accounts under a governed OU structure so compliance and access boundaries follow the org chart rather than cutting across it.",
       highlights: [
         "Designed the OU hierarchy — Core, Security, Infrastructure and Platform OUs alongside per-vertical OUs, each with QA, performance-test and production accounts underneath.",
         "Service Control Policies attached at every OU level, so guardrails are inherited rather than reapplied per account.",
         "AWS Control Tower for landing zone provisioning, with Service Catalog for standardised account vending.",
-        "IAM Identity Center federated to the client's external identity provider, giving single sign-on into every account with per-account permission sets instead of long-lived IAM users.",
+        "IAM Identity Center federated to Aerohub's external identity provider, giving single sign-on into every account with per-account permission sets instead of long-lived IAM users.",
         "Dedicated Log Archive account aggregating CloudTrail and CloudWatch into S3, and a separate Security account running Security Hub, GuardDuty and AWS Config across the organisation.",
         "Centralised billing at the organisation root for cost visibility per account and per vertical.",
       ],

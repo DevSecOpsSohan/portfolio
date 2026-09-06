@@ -452,7 +452,7 @@ pages.push({
   file: "public/projects/index.html",
   title: "Client Projects | Sohan Dogra",
   description:
-    "Two AWS delivery engagements: a payments platform built to PCI DSS compliance on EKS and Istio, and a multi-account landing zone re-architecture with Control Tower, SCPs and IAM Identity Center.",
+    "Two AWS delivery engagements for Atmoon and Aerohub: a payments platform built to PCI DSS compliance on EKS and Istio, and a multi-account landing zone re-architecture with Control Tower, SCPs and IAM Identity Center.",
   body: `  <header class="page-head">
     <h1>Client projects</h1>
     <p class="summary">Two infrastructure engagements delivered end to end — discovery, architecture, build and handover. Diagrams below show the architecture pattern; client account identifiers, internal hostnames and network ranges are deliberately omitted.</p>
@@ -521,11 +521,11 @@ pages.push({
     <div class="proj-head">
       <div>
         <h2 class="plain">Multi-account landing zone and compliance re-architecture</h2>
-        <p class="proj-meta"><span class="client">US education technology group</span> · Name withheld under NDA</p>
+        <p class="proj-meta"><span class="client">Aerohub</span> · India · Landing zone re-architecture</p>
       </div>
     </div>
 
-    <p class="lede">The client ran a flat AWS estate where environments and business verticals shared blast radius and access. This engagement moved them onto an Organizations-based landing zone so compliance and access boundaries follow the org chart instead of cutting across it.</p>
+    <p class="lede">Aerohub ran a flat AWS estate where environments and business verticals shared blast radius and access. This engagement moved them onto an Organizations-based landing zone so compliance and access boundaries follow the org chart instead of cutting across it.</p>
 
     <h3 class="sub">Organization structure</h3>
     <p class="note">Guardrails are attached at OU level and inherited downward, so a new account arrives governed rather than needing policy reapplied by hand.</p>
@@ -603,7 +603,7 @@ pages.push({
       <li><b>OU hierarchy designed around blast radius.</b> Core, Security and Infrastructure OUs alongside per-vertical workload OUs, each with QA, performance-test and production accounts underneath.</li>
       <li><b>SCPs at every level.</b> Guardrails inherited down the tree rather than reapplied per account — which is what stops policy drift as the estate grows.</li>
       <li><b>Control Tower and Service Catalog.</b> Landing zone provisioning plus standardised account vending, so a new account is a request rather than a project.</li>
-      <li><b>Federated access.</b> IAM Identity Center wired to the client's existing identity provider — single sign-on into every account with per-account permission sets, and no long-lived IAM users to rotate or leak.</li>
+      <li><b>Federated access.</b> IAM Identity Center wired to Aerohub's existing identity provider — single sign-on into every account with per-account permission sets, and no long-lived IAM users to rotate or leak.</li>
       <li><b>Centralised audit trail.</b> A dedicated Log Archive account aggregating CloudTrail and CloudWatch into S3, separate from the Security account running Security Hub, GuardDuty and AWS Config across the organisation.</li>
       <li><b>Cost visibility per vertical.</b> Centralised billing at the root, with account boundaries that make spend attributable to the team that caused it.</li>
     </ul>
