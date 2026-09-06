@@ -645,3 +645,75 @@ h2.plain::after { display: none; }
   .quick button { padding: 9px 14px; }
   .links a, .pager a { padding: 12px 18px; }
 }
+
+/* ================= client project case studies ================= */
+
+.proj-head { margin-bottom: 14px; }
+.proj-meta { margin: 4px 0 0; color: var(--muted); font-size: .88rem; }
+.proj-meta .client {
+  color: var(--accent); font-weight: 600;
+}
+
+h3.sub {
+  margin: 30px 0 8px; font-size: .78rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------- tiered VPC diagram ---------- */
+
+.tiers { display: grid; gap: 10px; min-width: 460px; }
+
+.tier {
+  position: relative;
+  border: 1px solid var(--line); background: var(--panel);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.tier::after {
+  content: ""; position: absolute; left: 50%; bottom: -10px;
+  width: 1px; height: 10px; background: var(--line-bright);
+}
+.tier:last-child::after { display: none; }
+.tier b { display: block; font-size: .82rem; margin-bottom: 9px; }
+.tier.edge { border-color: rgba(74,222,128,.35); }
+.tier.edge b { color: var(--accent); }
+.tier.db { border-color: var(--line-bright); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span {
+  border: 1px solid var(--line-bright); border-radius: 6px;
+  padding: 4px 10px; font-size: .78rem; color: #b8bec9;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.side-note {
+  margin-top: 16px; border-left: 2px solid var(--accent);
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; padding: 14px 16px;
+}
+.side-note b { display: block; font-size: .88rem; margin-bottom: 5px; }
+.side-note p { margin: 0; color: #b8bec9; font-size: .9rem; }
+
+/* ---------- OU hierarchy diagram ---------- */
+
+.ou-svg { width: 900px; height: auto; display: block; }
+.ou-svg .box { fill: var(--panel); stroke: var(--line); stroke-width: 1; }
+.ou-svg .box.root { fill: var(--accent-soft); stroke: rgba(74,222,128,.4); }
+.ou-svg .box.ou { stroke: var(--line-bright); }
+.ou-svg .box.prod { stroke: rgba(74,222,128,.4); }
+.ou-svg .box.idp { fill: var(--bg-soft); stroke: var(--line-bright); }
+.ou-svg .line { stroke: var(--line-bright); stroke-width: 1; fill: none; }
+.ou-svg text { font-family: inherit; }
+.ou-svg .t-title { fill: var(--accent); font-size: 14px; font-weight: 600; }
+.ou-svg .t-sub { fill: var(--muted); font-size: 10.5px; }
+.ou-svg .t-ou { fill: #e9ebef; font-size: 12.5px; font-weight: 600; }
+.ou-svg .t-scp { fill: var(--muted); font-size: 10px; letter-spacing: .06em; }
+.ou-svg .t-acct { fill: #e9ebef; font-size: 11.5px; }
+.ou-svg .t-svc { fill: var(--muted); font-size: 9.5px; }
+
+/* ---------- deliverables ---------- */
+
+.deliverables { margin: 0; padding-left: 18px; color: #b8bec9; font-size: .93rem; }
+.deliverables li { margin-bottom: 9px; }
+.deliverables li b { color: var(--text); font-weight: 600; }
+.deliverables li::marker { color: var(--line-bright); }
+
+.contact-card h2.plain { margin-bottom: 8px; }

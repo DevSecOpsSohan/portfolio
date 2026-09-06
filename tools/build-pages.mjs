@@ -213,7 +213,7 @@ ${principlesGrid}
       </a>
       <a class="card" href="/projects/">
         <b>Projects</b>
-        <span>Things built outside work, including the AI assistant on this site.</span>
+        <span>Two AWS delivery engagements — a PCI-DSS payments platform, and a multi-account landing zone re-architecture.</span>
       </a>
       <a class="card" href="/contact/">
         <b>Contact</b>
@@ -450,28 +450,199 @@ ${POSTS.map(
 pages.push({
   path: "/projects/",
   file: "public/projects/index.html",
-  title: "Projects | Sohan Dogra",
+  title: "Client Projects | Sohan Dogra",
   description:
-    "Projects built by Sohan Dogra outside client work, including an AI content tool on Cloudflare Workers and the portfolio assistant running on Workers AI.",
+    "Two AWS delivery engagements: a payments platform built to PCI DSS compliance on EKS and Istio, and a multi-account landing zone re-architecture with Control Tower, SCPs and IAM Identity Center.",
   body: `  <header class="page-head">
-    <h1>Projects</h1>
-    <p class="summary">Built outside client work — mostly to try an idea end to end rather than to ship a product.</p>
+    <h1>Client projects</h1>
+    <p class="summary">Two infrastructure engagements delivered end to end — discovery, architecture, build and handover. Diagrams below show the architecture pattern; client account identifiers, internal hostnames and network ranges are deliberately omitted.</p>
   </header>
 
+  <!-- ===================== PROJECT 1 ===================== -->
   <section class="reveal">
-    <h2>Projects</h2>
+    <div class="proj-head">
+      <div>
+        <h2 class="plain">Payments platform infrastructure, built to compliance</h2>
+        <p class="proj-meta"><span class="client">Atmoon</span> · Greenfield build · Delivered in 3 months</p>
+      </div>
+    </div>
 
-    <article class="project">
-      <h3><a href="https://github.com/DevSecOpsSohan/repurpose-ai" rel="noopener">repurpose-ai</a></h3>
-      <p>Turns one long-form transcript into a week of platform-native posts — clip picks with hooks, per-network captions, thumbnail copy and a posting schedule. The Zod schema doubles as the model output contract, so the API returns typed data instead of prose to parse.</p>
-      <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Claude API</span><span class="tag">Cloudflare Workers</span></div>
-    </article>
+    <p class="lede">A payments platform needs its compliance posture designed in, not retrofitted. This engagement ran from a discovery pass over the existing estate through to running environments — account structure, network tiering, cluster security and patching, built against PCI DSS requirements.</p>
 
-    <article class="project">
-      <h3><a href="https://github.com/DevSecOpsSohan/portfolio" rel="noopener">This site</a></h3>
-      <p>Static assets on Cloudflare Workers with an AI assistant running on Workers AI through an AI binding — no API key in the frontend, no separate AI server. The assistant is grounded in a structured knowledge base so it cannot invent experience, and project enquiries are persisted to D1 before any email is attempted.</p>
-      <div class="tags"><span class="tag">Cloudflare Workers</span><span class="tag">Workers AI</span><span class="tag">D1</span><span class="tag">Vanilla JS</span></div>
-    </article>
+    <h3 class="sub">Architecture</h3>
+    <p class="note">Two availability zones. Every tier is its own subnet with its own NACL and security group, so traffic between tiers is explicitly allowed rather than implicitly reachable.</p>
+
+    <div class="flow-scroll">
+      <div class="tiers">
+        <div class="tier edge">
+          <b>Public subnets — AZ-a · AZ-b</b>
+          <div class="chips"><span>Internet Gateway</span><span>Network Load Balancer</span><span>NAT Gateway per AZ</span></div>
+        </div>
+        <div class="tier">
+          <b>Application subnets</b>
+          <div class="chips"><span>Amazon EKS worker nodes</span><span>Istio service mesh</span><span>Auto Scaling</span></div>
+        </div>
+        <div class="tier">
+          <b>Middleware subnets</b>
+          <div class="chips"><span>RabbitMQ</span><span>Redis</span></div>
+        </div>
+        <div class="tier db">
+          <b>Database subnets</b>
+          <div class="chips"><span>PostgreSQL</span><span>MongoDB</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-note">
+      <b>Management VPC — peered, not shared</b>
+      <p>Jenkins, the application load balancer, OpenVPN access and the EKS control-plane endpoint live in a separate VPC peered to the workload VPCs. Operational entry points sit outside the application network, so administrative access is not a hole in the workload perimeter.</p>
+    </div>
+
+    <h3 class="sub">What was delivered</h3>
+    <ul class="deliverables">
+      <li><b>Pre-discovery before build.</b> Established what actually ran where, so the target design addressed real workloads rather than assumptions.</li>
+      <li><b>Account structure and guardrails.</b> OUs per environment with Service Control Policies scoped per account, and a central tagging policy enforced across the estate for cost attribution and ownership.</li>
+      <li><b>Everything in Terraform.</b> Infrastructure provisioned as code, so environments are reproducible and drift is visible rather than discovered during an incident.</li>
+      <li><b>Patching that does not depend on people.</b> OS configuration through Ansible, patch cycles through AWS Systems Manager Patch Manager.</li>
+      <li><b>Cluster security in depth.</b> Istio provides mTLS between services and the APM visibility the compliance requirement asked for; Kubernetes RBAC governs who and what can act inside the cluster.</li>
+      <li><b>Observability from day one.</b> Prometheus and Grafana for metrics, EFK for logs — in place at handover, not added after the first incident.</li>
+    </ul>
+
+    <div class="tags">
+      <span class="tag">AWS</span><span class="tag">Terraform</span><span class="tag">Ansible</span>
+      <span class="tag">AWS SSM</span><span class="tag">Amazon EKS</span><span class="tag">Istio</span>
+      <span class="tag">Kubernetes RBAC</span><span class="tag">SCPs</span><span class="tag">PCI DSS</span>
+      <span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">EFK</span>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECT 2 ===================== -->
+  <section class="reveal">
+    <div class="proj-head">
+      <div>
+        <h2 class="plain">Multi-account landing zone and compliance re-architecture</h2>
+        <p class="proj-meta"><span class="client">US education technology group</span> · Name withheld under NDA</p>
+      </div>
+    </div>
+
+    <p class="lede">The client ran a flat AWS estate where environments and business verticals shared blast radius and access. This engagement moved them onto an Organizations-based landing zone so compliance and access boundaries follow the org chart instead of cutting across it.</p>
+
+    <h3 class="sub">Organization structure</h3>
+    <p class="note">Guardrails are attached at OU level and inherited downward, so a new account arrives governed rather than needing policy reapplied by hand.</p>
+
+    <div class="flow-scroll">
+      <svg class="ou-svg" viewBox="0 0 900 430" role="img" aria-label="AWS Organizations hierarchy: organization root with Core, Security, Infrastructure and workload OUs, each containing accounts">
+        <!-- root -->
+        <rect class="box root" x="250" y="8" width="400" height="58" rx="8"/>
+        <text class="t-title" x="450" y="30" text-anchor="middle">Organization root</text>
+        <text class="t-sub" x="450" y="50" text-anchor="middle">Control Tower · IAM Identity Center · Service Catalog · Billing</text>
+
+        <!-- bus -->
+        <path class="line" d="M450 66 V96 M110 96 H790 M110 96 V126 M337 96 V126 M563 96 V126 M790 96 V126"/>
+
+        <!-- OU row -->
+        <rect class="box ou" x="20" y="126" width="180" height="52" rx="8"/>
+        <text class="t-ou" x="110" y="148" text-anchor="middle">Core OU</text>
+        <text class="t-scp" x="110" y="167" text-anchor="middle">SCP</text>
+
+        <rect class="box ou" x="247" y="126" width="180" height="52" rx="8"/>
+        <text class="t-ou" x="337" y="148" text-anchor="middle">Security OU</text>
+        <text class="t-scp" x="337" y="167" text-anchor="middle">SCP</text>
+
+        <rect class="box ou" x="473" y="126" width="180" height="52" rx="8"/>
+        <text class="t-ou" x="563" y="148" text-anchor="middle">Infrastructure OU</text>
+        <text class="t-scp" x="563" y="167" text-anchor="middle">SCP</text>
+
+        <rect class="box ou" x="700" y="126" width="180" height="52" rx="8"/>
+        <text class="t-ou" x="790" y="148" text-anchor="middle">Workload OUs</text>
+        <text class="t-scp" x="790" y="167" text-anchor="middle">SCP · per vertical</text>
+
+        <!-- drops -->
+        <path class="line" d="M110 178 V206 M337 178 V206 M563 178 V206 M790 178 V206"/>
+
+        <!-- accounts -->
+        <rect class="box acct" x="20" y="206" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="110" y="226" text-anchor="middle">Log Archive account</text>
+        <text class="t-svc" x="110" y="242" text-anchor="middle">CloudTrail · CloudWatch · S3</text>
+
+        <rect class="box acct" x="20" y="262" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="110" y="282" text-anchor="middle">Audit account</text>
+        <text class="t-svc" x="110" y="298" text-anchor="middle">Read-only assurance</text>
+
+        <rect class="box acct" x="247" y="206" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="337" y="226" text-anchor="middle">Security account</text>
+        <text class="t-svc" x="337" y="242" text-anchor="middle">Security Hub · GuardDuty</text>
+
+        <rect class="box acct" x="247" y="262" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="337" y="282" text-anchor="middle">AWS Config</text>
+        <text class="t-svc" x="337" y="298" text-anchor="middle">Org-wide conformance</text>
+
+        <rect class="box acct" x="473" y="206" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="563" y="226" text-anchor="middle">Shared services</text>
+        <text class="t-svc" x="563" y="242" text-anchor="middle">Networking · tooling</text>
+
+        <rect class="box acct" x="700" y="206" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="790" y="226" text-anchor="middle">QA account</text>
+
+        <rect class="box acct" x="700" y="258" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="790" y="278" text-anchor="middle">Performance-test account</text>
+
+        <rect class="box acct prod" x="700" y="310" width="180" height="44" rx="6"/>
+        <text class="t-acct" x="790" y="330" text-anchor="middle">Production account</text>
+        <text class="t-svc" x="790" y="346" text-anchor="middle">EKS · RDS · EC2</text>
+
+        <!-- idp -->
+        <rect class="box idp" x="250" y="368" width="400" height="50" rx="8"/>
+        <text class="t-ou" x="450" y="390" text-anchor="middle">External identity provider &#8594; IAM Identity Center</text>
+        <text class="t-svc" x="450" y="408" text-anchor="middle">SSO into every account · per-account permission sets · no long-lived IAM users</text>
+      </svg>
+    </div>
+
+    <h3 class="sub">What was delivered</h3>
+    <ul class="deliverables">
+      <li><b>OU hierarchy designed around blast radius.</b> Core, Security and Infrastructure OUs alongside per-vertical workload OUs, each with QA, performance-test and production accounts underneath.</li>
+      <li><b>SCPs at every level.</b> Guardrails inherited down the tree rather than reapplied per account — which is what stops policy drift as the estate grows.</li>
+      <li><b>Control Tower and Service Catalog.</b> Landing zone provisioning plus standardised account vending, so a new account is a request rather than a project.</li>
+      <li><b>Federated access.</b> IAM Identity Center wired to the client's existing identity provider — single sign-on into every account with per-account permission sets, and no long-lived IAM users to rotate or leak.</li>
+      <li><b>Centralised audit trail.</b> A dedicated Log Archive account aggregating CloudTrail and CloudWatch into S3, separate from the Security account running Security Hub, GuardDuty and AWS Config across the organisation.</li>
+      <li><b>Cost visibility per vertical.</b> Centralised billing at the root, with account boundaries that make spend attributable to the team that caused it.</li>
+    </ul>
+
+    <div class="tags">
+      <span class="tag">AWS Organizations</span><span class="tag">Control Tower</span><span class="tag">SCPs</span>
+      <span class="tag">IAM Identity Center</span><span class="tag">Service Catalog</span><span class="tag">Security Hub</span>
+      <span class="tag">GuardDuty</span><span class="tag">AWS Config</span><span class="tag">CloudTrail</span>
+      <span class="tag">Amazon EKS</span><span class="tag">RDS</span>
+    </div>
+  </section>
+
+  <!-- ===================== TOOLCHAIN ===================== -->
+  <section class="reveal">
+    <h2>Delivery toolchain</h2>
+    <p class="lede">The pipeline these platforms are delivered through — commit to production, with the gates that run on the way.</p>
+    <div class="flow-scroll">
+      <ol class="flow">
+        <li><b>Git</b><span>Desired state</span></li>
+        <li><b>GitLab CI</b><span>Build · test</span></li>
+        <li><b>Security gates</b><span>SAST · Gitleaks · Trivy</span></li>
+        <li><b>Terraform</b><span>Plan · apply</span></li>
+        <li><b>Argo CD</b><span>App-of-Apps sync</span></li>
+        <li><b>EKS</b><span>Istio canary</span></li>
+        <li><b>Observability</b><span>Prometheus · Grafana</span></li>
+      </ol>
+    </div>
+    <p class="note">Rollback is a git revert — the same path in reverse, not a separate runbook.</p>
+  </section>
+
+  <section class="reveal">
+    <div class="contact-card">
+      <h2 class="plain">Remapping your own infrastructure?</h2>
+      <p>If you are looking at a flat AWS estate, an upcoming compliance audit, or a platform that needs to move onto Kubernetes without a rewrite — this is the work I do. Discovery first, then a target architecture you can actually operate.</p>
+      <div class="links">
+        <a href="/contact/" class="primary">Start a project enquiry</a>
+        <a href="mailto:sohandogra703@gmail.com">Email directly</a>
+      </div>
+    </div>
   </section>
 
   <nav class="pager" aria-label="Pagination">

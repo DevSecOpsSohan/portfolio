@@ -170,20 +170,44 @@ export const profile = {
     },
   ],
 
+  /**
+   * Client delivery engagements. Details come from Sohan's own account of the
+   * work and the architecture diagrams he produced. Client account IDs,
+   * internal hostnames and network CIDRs are deliberately excluded — the
+   * architecture pattern is what demonstrates the work.
+   */
   projects: [
     {
-      name: "repurpose-ai",
-      url: "https://github.com/DevSecOpsSohan/repurpose-ai",
+      name: "Atmoon — payments platform infrastructure, built to compliance",
+      client: "Atmoon",
+      duration: "Delivered from scratch in 3 months",
       description:
-        "Turns one long-form transcript into a week of platform-native posts — clip picks with hooks, per-network captions, thumbnail copy and a posting schedule. The Zod schema doubles as the model output contract, so the API returns typed data rather than prose to parse.",
-      stack: ["Next.js", "TypeScript", "Claude API", "Cloudflare Workers"],
+        "Greenfield AWS infrastructure for a payments platform, delivered end to end from discovery through to running environments. Started with a discovery pass over the existing estate to establish what actually ran where, then designed and built the target architecture against compliance requirements including PCI DSS.",
+      highlights: [
+        "Pre-discovery of the existing estate before any build, so the target design addressed real workloads rather than assumptions.",
+        "Multi-account AWS Organization with OUs per environment and Service Control Policies scoped per account, plus a central tagging policy enforced across the estate.",
+        "Tiered VPC design across two availability zones — public, application, middleware and database subnets, each with its own NACLs and security groups, and NAT gateways per AZ.",
+        "Separate management VPC peered to the workload VPCs, carrying Jenkins, the load balancer and OpenVPN access so operational entry points sit outside the application network.",
+        "All infrastructure provisioned with Terraform; OS configuration and patching handled through Ansible and AWS Systems Manager Patch Manager.",
+        "Amazon EKS with Istio service mesh for APM visibility and mTLS between services, with Kubernetes RBAC enforced on top of the cluster.",
+        "Observability across the platform with Prometheus, Grafana and an EFK logging stack.",
+      ],
+      stack: ["AWS", "Terraform", "Ansible", "AWS SSM", "Amazon EKS", "Istio", "Kubernetes RBAC", "Service Control Policies", "Prometheus", "Grafana", "EFK"],
     },
     {
-      name: "This portfolio",
-      url: "https://github.com/DevSecOpsSohan/portfolio",
+      name: "US EdTech group — multi-account landing zone and compliance re-architecture",
+      client: "US-based education technology group (name withheld under NDA)",
       description:
-        "Static site served from Cloudflare Workers static assets, with an AI assistant running on Workers AI through an AI binding. No API keys in the frontend, no separate AI server, and grounded strictly in a structured knowledge base.",
-      stack: ["Cloudflare Workers", "Workers AI", "Vanilla JS"],
+        "Moved a US client from a flat AWS estate to an Organizations-based landing zone, segregating environments and business verticals into their own accounts under a governed OU structure so compliance and access boundaries follow the org chart rather than cutting across it.",
+      highlights: [
+        "Designed the OU hierarchy — Core, Security, Infrastructure and Platform OUs alongside per-vertical OUs, each with QA, performance-test and production accounts underneath.",
+        "Service Control Policies attached at every OU level, so guardrails are inherited rather than reapplied per account.",
+        "AWS Control Tower for landing zone provisioning, with Service Catalog for standardised account vending.",
+        "IAM Identity Center federated to the client's external identity provider, giving single sign-on into every account with per-account permission sets instead of long-lived IAM users.",
+        "Dedicated Log Archive account aggregating CloudTrail and CloudWatch into S3, and a separate Security account running Security Hub, GuardDuty and AWS Config across the organisation.",
+        "Centralised billing at the organisation root for cost visibility per account and per vertical.",
+      ],
+      stack: ["AWS Organizations", "AWS Control Tower", "Service Control Policies", "IAM Identity Center", "Service Catalog", "Security Hub", "GuardDuty", "AWS Config", "CloudTrail", "Amazon EKS", "RDS"],
     },
   ],
 
@@ -293,9 +317,13 @@ export function knowledgeBaseText() {
     lines.push(`    Outcome: ${c.outcome}`);
   }
 
-  lines.push("\nPERSONAL PROJECTS:");
+  lines.push("\nCLIENT DELIVERY PROJECTS:");
   for (const pr of p.projects) {
-    lines.push(`- ${pr.name} (${pr.url}): ${pr.description} Stack: ${pr.stack.join(", ")}`);
+    lines.push(`- ${pr.name}`);
+    lines.push(`    Client: ${pr.client}${pr.duration ? " — " + pr.duration : ""}`);
+    lines.push(`    ${pr.description}`);
+    for (const h of pr.highlights) lines.push(`      * ${h}`);
+    lines.push(`    Stack: ${pr.stack.join(", ")}`);
   }
 
   lines.push("\nENGINEERING PRINCIPLES:");
