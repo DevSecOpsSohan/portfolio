@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experience &amp; Case Studies | Sohan Dogra</title>
+<meta name="description" content="Platform and DevOps roles at Publicis Sapient, Deutsche Telekom Digital Labs and OpsTree Solutions, with four production case studies covering Argo CD GitOps, GitLab Runner tuning, EKS upgrades and AWS governance.">
+<link rel="canonical" href="https://portfolio.sohandogra703.workers.dev/experience/">
+<meta property="og:title" content="Experience &amp; Case Studies | Sohan Dogra">
+<meta property="og:description" content="Platform and DevOps roles at Publicis Sapient, Deutsche Telekom Digital Labs and OpsTree Solutions, with four production case studies covering Argo CD GitOps, GitLab Runner tuning, EKS upgrades and AWS governance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://portfolio.sohandogra703.workers.dev/experience/">
+<meta property="og:image" content="https://portfolio.sohandogra703.workers.dev/avatar.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0b0d'/><text x='50' y='70' font-family='system-ui,sans-serif' font-size='54' font-weight='700' fill='%234ade80' text-anchor='middle'>SD</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">Sohan Dogra</a>
+    <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/experience/">Experience</a></li>
+        <li><a href="/blog/">Writing</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+<main id="main">
+  <header class="page-head">
+    <h1>Experience</h1>
+    <p class="summary">Four years across three organisations, moving from cloud governance and IaC into GitLab platform ownership and GitOps delivery.</p>
+  </header>
+
+  <section class="reveal">
+    <h2>Roles</h2>
+    <div class="job now">
+      <h3>Senior Associate — Infrastructure, Platform Engineering</h3>
+      <div class="co">Publicis Sapient · Gurgaon</div>
+      <div class="when">Sep 2025 – Present</div>
+      <ul>
+        <li>Own GitOps delivery for backend services on Argo CD, standardising promotion across environments and removing manual per-environment configuration for client-facing platforms.</li>
+        <li>Authored reusable Helm charts and an App-of-Apps architecture so product teams onboard services self-service — cutting config drift and platform-team ticket load.</li>
+        <li>Built a DevSecOps CI pipeline with SAST, Gitleaks and Trivy as shared reusable stages, shifting source, secret and container scanning left across every consuming repo.</li>
+        <li>Escalation point and SME for deployment failures, Helm templating and Argo CD sync errors across application and platform teams.</li>
+      </ul>
+      <div class="tags"><span class="tag">Argo CD</span><span class="tag">Helm</span><span class="tag">Kubernetes</span><span class="tag">Trivy</span><span class="tag">Gitleaks</span></div>
+    </div>
+
+    <div class="job">
+      <h3>DevOps Engineer — GitLab CI/CD &amp; Kubernetes Platform</h3>
+      <div class="co">Deutsche Telekom Digital Labs · Gurgaon</div>
+      <div class="when">Dec 2024 – Sep 2025</div>
+      <ul>
+        <li>Administered and tuned the GitLab Runner fleet at the Linux OS level, resolving contention and resource bottlenecks to materially improve pipeline throughput across shared CI capacity.</li>
+        <li>Planned and executed production Amazon EKS upgrades with minimal downtime — owning workload validation, rollback readiness and service-availability verification end to end.</li>
+        <li>Implemented Istio service mesh with Argo CD canary deployments for progressive delivery, traffic shaping and rapid rollback on production microservices.</li>
+        <li>Led RabbitMQ and Apache NiFi production upgrades with zero-to-minimal downtime, protecting business-critical integration services.</li>
+      </ul>
+      <div class="tags"><span class="tag">GitLab Runner</span><span class="tag">Amazon EKS</span><span class="tag">Istio</span><span class="tag">Argo CD</span><span class="tag">OWASP ZAP</span></div>
+    </div>
+
+    <div class="job">
+      <h3>DevOps Specialist — Cloud Platform, IaC &amp; Governance</h3>
+      <div class="co">OpsTree Solutions · Noida</div>
+      <div class="when">Apr 2022 – Dec 2024</div>
+      <ul>
+        <li>Established AWS Control Tower landing zones, Service Control Policies and IAM Identity Center SSO across a multi-account estate — owning access control and account structure, not just build automation.</li>
+        <li>Built Terraform provisioning pipelines driven from GitLab CI/CD, automating repeatable infrastructure delivery across AWS and GCP.</li>
+        <li>Delivered cloud optimisation work that cut spend by 30% while building secure AWS foundations for development and production.</li>
+        <li>Developed reusable Ansible roles with dynamic inventory and Molecule test coverage; automated compliance checks saving ~25 audit hours per month.</li>
+      </ul>
+      <div class="tags"><span class="tag">Control Tower</span><span class="tag">SCPs</span><span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">GKE</span></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Case studies</h2>
+    <p class="lede">Problem → approach → outcome. All from documented production work, not side projects.</p>
+    <details class="case">
+      <summary>
+        <span class="case-name">GitOps delivery with Argo CD and App-of-Apps</span>
+        <span class="case-where">Publicis Sapient</span>
+      </summary>
+      <div class="case-body">
+        <h4>Problem</h4><p>Backend services were promoted across environments manually, so every environment needed its own hand-maintained configuration. That produced drift between environments and a steady stream of tickets into the platform team.</p>
+        <h4>Approach</h4><p>Standardised promotion on Argo CD and authored reusable Helm charts behind an App-of-Apps structure, so a new service is onboarded by declaring it rather than by hand-configuring each environment.</p>
+        <h4>Outcome</h4><p>Product teams onboard services self-service. Configuration drift between environments is reduced and platform-team ticket load is lower.</p>
+        <div class="tags"><span class="tag">Argo CD</span><span class="tag">Helm</span><span class="tag">Kubernetes</span><span class="tag">Git</span></div>
+      </div>
+    </details>
+    <details class="case">
+      <summary>
+        <span class="case-name">GitLab Runner fleet tuning</span>
+        <span class="case-where">Deutsche Telekom Digital Labs</span>
+      </summary>
+      <div class="case-body">
+        <h4>Problem</h4><p>Shared CI capacity was contended. Developers waited on pipelines, and the bottleneck sat below the CI layer — in how runners were provisioned and how the host OS handled concurrent jobs.</p>
+        <h4>Approach</h4><p>Administered and tuned the GitLab Runner fleet at the Linux OS level, resolving resource contention and bottlenecks rather than simply adding more runners.</p>
+        <h4>Outcome</h4><p>Materially improved pipeline throughput and reduced developer wait time across shared CI capacity.</p>
+        <div class="tags"><span class="tag">GitLab Runner</span><span class="tag">Linux</span><span class="tag">GitLab CI/CD</span></div>
+      </div>
+    </details>
+    <details class="case">
+      <summary>
+        <span class="case-name">Production EKS upgrades and progressive delivery</span>
+        <span class="case-where">Deutsche Telekom Digital Labs</span>
+      </summary>
+      <div class="case-body">
+        <h4>Problem</h4><p>Production Kubernetes clusters needed version upgrades without taking down business-critical microservices, and rollouts had no safe intermediate step between deployed and not deployed.</p>
+        <h4>Approach</h4><p>Planned and executed EKS upgrades end to end — workload and dependency validation, rollback readiness, service-availability verification. Introduced Istio with Argo CD canary deployments so traffic could be shifted gradually and rolled back quickly.</p>
+        <h4>Outcome</h4><p>Upgrades completed with minimal downtime. Progressive delivery gave production rollouts a safe, reversible path.</p>
+        <div class="tags"><span class="tag">Amazon EKS</span><span class="tag">Istio</span><span class="tag">Argo CD</span></div>
+      </div>
+    </details>
+    <details class="case">
+      <summary>
+        <span class="case-name">Multi-account AWS governance</span>
+        <span class="case-where">OpsTree Solutions</span>
+      </summary>
+      <div class="case-body">
+        <h4>Problem</h4><p>A multi-account AWS estate needed consistent account structure, access control and guardrails — governance, not just build automation.</p>
+        <h4>Approach</h4><p>Established Control Tower landing zones, Service Control Policies and AWS SSO federation, and drove Terraform provisioning pipelines from GitLab CI/CD so infrastructure delivery was repeatable across AWS and GCP.</p>
+        <h4>Outcome</h4><p>Cloud spend reduced by 30%. Compliance automation saved approximately 25 manual audit hours per month.</p>
+        <div class="tags"><span class="tag">Control Tower</span><span class="tag">SCPs</span><span class="tag">AWS SSO</span><span class="tag">Terraform</span></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="reveal">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="sk">
+        <h3>GitLab Platform</h3>
+        <div class="tags"><span class="tag">CI/CD architecture</span><span class="tag">Runner fleet tuning</span><span class="tag">Reusable templates</span><span class="tag">Approval gates</span><span class="tag">Secrets handling</span></div>
+      </div>
+      <div class="sk">
+        <h3>Cloud &amp; Governance</h3>
+        <div class="tags"><span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">GCP / GKE</span><span class="tag">Control Tower</span><span class="tag">SCPs</span><span class="tag">IAM Identity Center</span></div>
+      </div>
+      <div class="sk">
+        <h3>Infrastructure as Code</h3>
+        <div class="tags"><span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Helm</span><span class="tag">Molecule</span></div>
+      </div>
+      <div class="sk">
+        <h3>Kubernetes &amp; GitOps</h3>
+        <div class="tags"><span class="tag">Argo CD</span><span class="tag">App-of-Apps</span><span class="tag">Istio</span><span class="tag">Canary delivery</span><span class="tag">Docker</span></div>
+      </div>
+      <div class="sk">
+        <h3>Security &amp; DevSecOps</h3>
+        <div class="tags"><span class="tag">SAST / DAST</span><span class="tag">Trivy</span><span class="tag">Gitleaks</span><span class="tag">SonarQube</span><span class="tag">OWASP ZAP</span><span class="tag">MobSF</span></div>
+      </div>
+      <div class="sk">
+        <h3>Observability &amp; Languages</h3>
+        <div class="tags"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">ELK</span><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Linux</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2>Certifications &amp; Education</h2>
+    <div class="certs">
+      <div class="cert"><div class="mark">AWS</div><div><b>Solutions Architect – Associate</b><span>Active</span></div></div>
+      <div class="cert"><div class="mark">K8s</div><div><b>Certified Kubernetes Administrator</b><span>Active</span></div></div>
+      <div class="cert"><div class="mark">BSc</div><div><b>Bachelor of Computer Science</b><span>Tilak Maharashtra Vidyapeeth, Pune · 2020–2023</span></div></div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Pagination">
+    <a class="prev" href="/">&larr; Home</a>
+    <a class="next" href="/blog/">Writing &rarr;</a>
+  </nav>
+</main>
+
+  <footer>
+    <span>&copy; <span id="year">2026</span> Sohan Dogra · AWS · Kubernetes · Terraform · CI/CD</span>
+    <span><a href="https://github.com/DevSecOpsSohan/portfolio">Source on GitHub</a></span>
+  </footer>
+</div>
+
+<script src="/app.js" defer></script>
+</body>
+</html>

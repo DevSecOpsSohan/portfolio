@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Sohan Dogra</title>
+<meta name="description" content="Projects built by Sohan Dogra outside client work, including an AI content tool on Cloudflare Workers and the portfolio assistant running on Workers AI.">
+<link rel="canonical" href="https://portfolio.sohandogra703.workers.dev/projects/">
+<meta property="og:title" content="Projects | Sohan Dogra">
+<meta property="og:description" content="Projects built by Sohan Dogra outside client work, including an AI content tool on Cloudflare Workers and the portfolio assistant running on Workers AI.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://portfolio.sohandogra703.workers.dev/projects/">
+<meta property="og:image" content="https://portfolio.sohandogra703.workers.dev/avatar.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0b0d'/><text x='50' y='70' font-family='system-ui,sans-serif' font-size='54' font-weight='700' fill='%234ade80' text-anchor='middle'>SD</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">Sohan Dogra</a>
+    <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/experience/">Experience</a></li>
+        <li><a href="/blog/">Writing</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+<main id="main">
+  <header class="page-head">
+    <h1>Projects</h1>
+    <p class="summary">Built outside client work — mostly to try an idea end to end rather than to ship a product.</p>
+  </header>
+
+  <section class="reveal">
+    <h2>Projects</h2>
+
+    <article class="project">
+      <h3><a href="https://github.com/DevSecOpsSohan/repurpose-ai" rel="noopener">repurpose-ai</a></h3>
+      <p>Turns one long-form transcript into a week of platform-native posts — clip picks with hooks, per-network captions, thumbnail copy and a posting schedule. The Zod schema doubles as the model output contract, so the API returns typed data instead of prose to parse.</p>
+      <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Claude API</span><span class="tag">Cloudflare Workers</span></div>
+    </article>
+
+    <article class="project">
+      <h3><a href="https://github.com/DevSecOpsSohan/portfolio" rel="noopener">This site</a></h3>
+      <p>Static assets on Cloudflare Workers with an AI assistant running on Workers AI through an AI binding — no API key in the frontend, no separate AI server. The assistant is grounded in a structured knowledge base so it cannot invent experience, and project enquiries are persisted to D1 before any email is attempted.</p>
+      <div class="tags"><span class="tag">Cloudflare Workers</span><span class="tag">Workers AI</span><span class="tag">D1</span><span class="tag">Vanilla JS</span></div>
+    </article>
+  </section>
+
+  <nav class="pager" aria-label="Pagination">
+    <a class="prev" href="/blog/">&larr; Writing</a>
+    <a class="next" href="/contact/">Contact &rarr;</a>
+  </nav>
+</main>
+
+  <footer>
+    <span>&copy; <span id="year">2026</span> Sohan Dogra · AWS · Kubernetes · Terraform · CI/CD</span>
+    <span><a href="https://github.com/DevSecOpsSohan/portfolio">Source on GitHub</a></span>
+  </footer>
+</div>
+
+<script src="/app.js" defer></script>
+</body>
+</html>

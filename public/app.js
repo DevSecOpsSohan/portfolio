@@ -1,17 +1,34 @@
-/* Portfolio front-end: avatar fallback, scroll reveal, and the AI chat client. */
+/* Shared front-end for every page: AI widget, nav state, reveal, forms. */
 
-document.getElementById("year").textContent = new Date().getFullYear();
+/* ---------- footer year ---------- */
 
-/* ---------- avatar falls back to initials ---------- */
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* ---------- mark the current page in the nav ---------- */
+
+(() => {
+  const here = location.pathname.replace(/\/index\.html$/, "/");
+  document.querySelectorAll("nav .wrap ul a").forEach((a) => {
+    const target = new URL(a.getAttribute("href"), location.origin).pathname;
+    if (target === here || (target !== "/" && here.startsWith(target))) {
+      a.setAttribute("aria-current", "page");
+    }
+  });
+})();
+
+/* ---------- avatar falls back to initials (home page only) ---------- */
 
 const avatar = document.getElementById("avatar");
-avatar.addEventListener("error", () => {
-  const fallback = document.createElement("div");
-  fallback.className = "avatar avatar-fallback";
-  fallback.textContent = "SD";
-  fallback.setAttribute("aria-label", "Sohan Dogra");
-  avatar.replaceWith(fallback);
-});
+if (avatar) {
+  avatar.addEventListener("error", () => {
+    const fallback = document.createElement("div");
+    fallback.className = "avatar avatar-fallback";
+    fallback.textContent = "SD";
+    fallback.setAttribute("aria-label", "Sohan Dogra");
+    avatar.replaceWith(fallback);
+  });
+}
 
 /* ---------- scroll reveal ---------- */
 
@@ -28,41 +45,74 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-/* ---------- floating widget open / close ---------- */
+/* ---------- mobile nav ---------- */
 
-const widget = document.querySelector(".widget");
-const panel = document.getElementById("chat-panel");
-const launcher = document.getElementById("chat-launcher");
-const closeBtn = document.getElementById("chat-close");
-
-function setOpen(open) {
-  widget.classList.toggle("open", open);
-  panel.hidden = !open;
-  launcher.setAttribute("aria-expanded", String(open));
-  if (open) {
-    document.getElementById("chat-input").focus();
-  } else {
-    launcher.focus();
-  }
+const navToggle = document.getElementById("nav-toggle");
+const navList = document.getElementById("nav-list");
+if (navToggle && navList) {
+  navToggle.addEventListener("click", () => {
+    const open = navList.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+  navList.addEventListener("click", (e) => {
+    if (e.target.tagName === "A") {
+      navList.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
-launcher.addEventListener("click", () => setOpen(panel.hidden));
-closeBtn.addEventListener("click", () => setOpen(false));
+/* ================= AI assistant widget =================
+   Injected here rather than duplicated into every page's HTML. */
 
-// "Ask Sohan's AI" in the hero and nav open the widget rather than jumping.
-document.querySelectorAll("[data-open-chat]").forEach((el) => {
-  el.addEventListener("click", (e) => {
-    e.preventDefault();
-    setOpen(true);
-  });
-});
+const BOT_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1.4"/>
+  <path d="M9 13v1.5M15 13v1.5"/><path d="M1.5 13v3M22.5 13v3"/></svg>`;
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !panel.hidden) setOpen(false);
-});
+const CLOSE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`;
 
-/* ---------- AI chat ---------- */
+const widget = document.createElement("div");
+widget.className = "widget";
+widget.innerHTML = `
+  <div class="chat-panel" id="chat-panel" hidden>
+    <div class="chat-head">
+      <div class="chat-id">
+        <span class="bot-avatar" aria-hidden="true">${BOT_SVG}</span>
+        <div><b>Ask Sohan's AI</b><span>Answers only from documented experience</span></div>
+      </div>
+      <div class="chat-actions">
+        <button type="button" id="mode-toggle" class="mode-btn" aria-pressed="false">Interview me</button>
+        <button type="button" id="chat-close" class="icon-btn" aria-label="Close assistant">${CLOSE_SVG}</button>
+      </div>
+    </div>
+    <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation">
+      <div class="msg bot"><p>Ask me about Sohan's experience, the platforms he's run, or how he approaches infrastructure. Or hit Interview me and I'll ask you DevOps questions instead.</p></div>
+    </div>
+    <div class="quick" id="quick">
+      <button type="button">30-second summary</button>
+      <button type="button">AWS experience?</button>
+      <button type="button">Kubernetes work?</button>
+      <button type="button">CI/CD tools?</button>
+      <button type="button">Why interview Sohan?</button>
+    </div>
+    <form class="chat-form" id="chat-form">
+      <label for="chat-input" class="sr-only">Your question</label>
+      <input id="chat-input" type="text" autocomplete="off" maxlength="600" placeholder="Ask anything…">
+      <button type="submit" id="chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+  <button id="chat-launcher" class="launcher" aria-expanded="false" aria-controls="chat-panel">
+    <span class="launcher-ico" aria-hidden="true">
+      <span class="ico-bot">${BOT_SVG}</span><span class="ico-close">${CLOSE_SVG}</span>
+    </span>
+    <span class="launcher-label">Ask Sohan's AI</span>
+  </button>`;
+document.body.appendChild(widget);
 
+const panel = document.getElementById("chat-panel");
+const launcher = document.getElementById("chat-launcher");
 const log = document.getElementById("chat-log");
 const form = document.getElementById("chat-form");
 const input = document.getElementById("chat-input");
@@ -73,6 +123,26 @@ const modeBtn = document.getElementById("mode-toggle");
 let mode = "assistant";
 let history = [];
 let busy = false;
+
+function setOpen(open) {
+  widget.classList.toggle("open", open);
+  panel.hidden = !open;
+  launcher.setAttribute("aria-expanded", String(open));
+  if (open) input.focus();
+  else launcher.focus();
+}
+
+launcher.addEventListener("click", () => setOpen(panel.hidden));
+document.getElementById("chat-close").addEventListener("click", () => setOpen(false));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !panel.hidden) setOpen(false);
+});
+document.querySelectorAll("[data-open-chat]").forEach((el) =>
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    setOpen(true);
+  })
+);
 
 function addMessage(role, text) {
   const el = document.createElement("div");
@@ -97,8 +167,7 @@ function addThinking() {
 function setBusy(state) {
   busy = state;
   send.disabled = state;
-  input.disabled = state;
-  // Don't touch textContent here — the send button holds an inline SVG icon.
+  input.disabled = state; // no textContent here — the button holds an SVG
 }
 
 async function ask(question) {
@@ -115,7 +184,6 @@ async function ask(question) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: question, mode, history }),
     });
-
     const data = await res.json();
     thinking.remove();
 
@@ -125,16 +193,12 @@ async function ask(question) {
     }
 
     addMessage("bot", data.answer);
-
     history.push({ role: "user", content: question });
     history.push({ role: "assistant", content: data.answer });
     history = history.slice(-12);
   } catch {
     thinking.remove();
-    addMessage(
-      "bot",
-      "Couldn't reach the assistant. Sohan's experience and projects are all on the page below."
-    );
+    addMessage("bot", "Couldn't reach the assistant. Sohan's experience is all on the site.");
   } finally {
     setBusy(false);
     input.focus();
@@ -161,20 +225,15 @@ modeBtn.addEventListener("click", () => {
   quick.hidden = interviewing;
 
   log.innerHTML = "";
-  if (interviewing) {
-    addMessage(
-      "bot",
-      "Interview mode. I'll ask you one DevOps question at a time and give you feedback on each answer. Say 'start' when you're ready, or name an area — AWS, Kubernetes, Terraform, CI/CD, observability, security."
-    );
-  } else {
-    addMessage(
-      "bot",
-      "Back to Q&A. Ask me anything about Sohan's experience, the platforms he's run, or how he approaches infrastructure."
-    );
-  }
+  addMessage(
+    "bot",
+    interviewing
+      ? "Interview mode. I'll ask you one DevOps question at a time and give feedback on each answer. Say 'start' when ready, or name an area — AWS, Kubernetes, Terraform, CI/CD, observability, security."
+      : "Back to Q&A. Ask me anything about Sohan's experience or how he approaches infrastructure."
+  );
 });
 
-/* ---------- project enquiry form ---------- */
+/* ================= project enquiry form (contact page) ================= */
 
 const enquiryForm = document.getElementById("enquiry-form");
 
@@ -182,21 +241,21 @@ if (enquiryForm) {
   const status = document.getElementById("enquiry-status");
   const submit = document.getElementById("enquiry-send");
 
-  function clearErrors() {
+  const clearErrors = () => {
     enquiryForm.querySelectorAll(".err").forEach((el) => (el.textContent = ""));
     enquiryForm.querySelectorAll(".invalid").forEach((el) => el.classList.remove("invalid"));
-  }
+  };
 
-  function showFieldErrors(fields) {
+  const showFieldErrors = (fields) => {
     for (const [name, msg] of Object.entries(fields || {})) {
       const err = enquiryForm.querySelector(`[data-err="${name}"]`);
-      const input = enquiryForm.querySelector(`[name="${name}"]`);
+      const field = enquiryForm.querySelector(`[name="${name}"]`);
       if (err) err.textContent = msg;
-      if (input) input.classList.add("invalid");
+      if (field) field.classList.add("invalid");
     }
     const first = enquiryForm.querySelector(".invalid");
     if (first) first.focus();
-  }
+  };
 
   enquiryForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -205,7 +264,6 @@ if (enquiryForm) {
     status.textContent = "";
 
     const data = Object.fromEntries(new FormData(enquiryForm).entries());
-
     submit.disabled = true;
     submit.textContent = "Sending…";
 
@@ -229,11 +287,10 @@ if (enquiryForm) {
       // Only promise a confirmation email when one actually went out.
       status.textContent = out.emailed
         ? "Thanks — your enquiry has been received. A confirmation is on its way to your inbox, and I'll reply personally within a couple of working days."
-        : "Thanks — your enquiry has been received and I'll reply personally within a couple of working days.";
+        : "Thanks — your enquiry has been received. I'll reply personally within a couple of working days.";
     } catch {
       status.className = "form-status bad";
-      status.textContent =
-        "Couldn't reach the server. Please email sohandogra703@gmail.com directly.";
+      status.textContent = "Couldn't reach the server. Please email sohandogra703@gmail.com directly.";
     } finally {
       submit.disabled = false;
       submit.textContent = "Send enquiry";

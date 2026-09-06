@@ -214,6 +214,37 @@ export const profile = {
     },
   ],
 
+  writing: [
+    {
+      title: "Pod Priority, Priority Class, and Preemption",
+      publisher: "OpsTree engineering blog",
+      date: "22 November 2022",
+      url: "https://opstree.com/blog/pod-priority-priority-classamp-preemption/",
+      about:
+        "Making sure critical Kubernetes workloads get scheduled ahead of others: defining priority classes, the integer priority range, and configuring preemption so higher-priority pods can evict lower-priority ones when a cluster is resource-constrained.",
+    },
+    {
+      title: "Securing Kubernetes Traffic with Cert-Manager & Let's Encrypt",
+      publisher: "OpsTree engineering blog",
+      date: "27 September 2022",
+      url: "https://opstree.com/blog/securing-k8s-traffic-with-cert-manager-amp-lets-encrypt/",
+      about:
+        "Automating TLS certificate issuance and renewal inside a cluster with cert-manager and the Kong ingress controller, wiring up ClusterIssuers so domain traffic is served over HTTPS without manual certificate handling.",
+    },
+    {
+      title: "Why Argo CD? Understanding GitOps Core Architecture",
+      publisher: "Medium",
+      url: "https://medium.com/@Sohan_Dogra/why-argo-cd-understanding-gitops-core-architecture-71b2e144dee2",
+      about: "Argo CD and the architecture underneath GitOps delivery.",
+    },
+    {
+      title: "Optimizing Prometheus: Dropping Unwanted Metrics for Better Memory Management",
+      publisher: "Medium",
+      url: "https://medium.com/@Sohan_Dogra/optimizing-prometheus-dropping-unwanted-metrics-for-better-memory-management-075721f918c8",
+      about: "Reducing Prometheus memory usage by dropping metrics that are never queried.",
+    },
+  ],
+
   certifications: [
     { name: "AWS Certified Solutions Architect – Associate", status: "Active" },
     { name: "Certified Kubernetes Administrator (CKA)", status: "Active" },
@@ -269,6 +300,12 @@ export function knowledgeBaseText() {
 
   lines.push("\nENGINEERING PRINCIPLES:");
   for (const pr of p.principles) lines.push(`- ${pr.title}: ${pr.body}`);
+
+  lines.push("\nPUBLISHED WRITING:");
+  for (const w of p.writing) {
+    lines.push(`- "${w.title}" — ${w.publisher}${w.date ? ", " + w.date : ""} (${w.url})`);
+    lines.push(`    ${w.about}`);
+  }
 
   lines.push("\nCERTIFICATIONS:");
   for (const c of p.certifications) lines.push(`- ${c.name} (${c.status})`);

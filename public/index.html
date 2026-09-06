@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sohan Dogra | Platform &amp; DevOps Engineer | AWS · Kubernetes · GitLab CI/CD</title>
 <meta name="description" content="Platform and DevOps engineer with 4+ years running production GitLab CI/CD, AWS, Kubernetes and Argo CD GitOps at Publicis Sapient, Deutsche Telekom Digital Labs and OpsTree. AWS SAA and CKA certified.">
-<meta property="og:title" content="Sohan Dogra — Platform &amp; DevOps Engineer">
-<meta property="og:description" content="4+ years running production GitLab CI/CD, AWS, Kubernetes and GitOps. Ask the AI assistant about his experience.">
+<link rel="canonical" href="https://portfolio.sohandogra703.workers.dev/">
+<meta property="og:title" content="Sohan Dogra | Platform &amp; DevOps Engineer | AWS · Kubernetes · GitLab CI/CD">
+<meta property="og:description" content="Platform and DevOps engineer with 4+ years running production GitLab CI/CD, AWS, Kubernetes and Argo CD GitOps at Publicis Sapient, Deutsche Telekom Digital Labs and OpsTree. AWS SAA and CKA certified.">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://portfolio.sohandogra703.workers.dev/">
 <meta property="og:image" content="https://portfolio.sohandogra703.workers.dev/avatar.jpg">
@@ -24,19 +25,22 @@
 
 <nav>
   <div class="wrap">
-    <a href="#top" class="brand">Sohan Dogra</a>
-    <ul>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#work">Engineering</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+    <a href="/" class="brand">Sohan Dogra</a>
+    <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/experience/">Experience</a></li>
+        <li><a href="/blog/">Writing</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="wrap" id="top">
+<div class="wrap">
 <main id="main">
-
   <header>
     <span class="badge"><span class="dot"></span> Open to remote · Immediate joiner</span>
 
@@ -64,9 +68,9 @@
     </div>
 
     <nav class="links" aria-label="Primary">
-      <a href="#work" class="primary">Explore my engineering</a>
+      <a href="/experience/" class="primary">Explore my engineering</a>
       <a href="/Sohan_Dogra_Resume.pdf">Download résumé</a>
-      <a href="#contact">Get in touch</a>
+      <a href="/contact/">Get in touch</a>
     </nav>
 
     <div class="stats">
@@ -77,142 +81,9 @@
     </div>
   </header>
 
-  <!-- ============ EXPERIENCE ============ -->
-  <section id="experience" class="reveal">
-    <h2>Experience</h2>
-
-    <div class="job now">
-      <h3>Senior Associate — Infrastructure, Platform Engineering</h3>
-      <div class="co">Publicis Sapient · Gurgaon</div>
-      <div class="when">Sep 2025 – Present</div>
-      <ul>
-        <li>Own GitOps delivery for backend services on Argo CD, standardising promotion across environments and removing manual per-environment configuration for client-facing platforms.</li>
-        <li>Authored reusable Helm charts and an App-of-Apps architecture so product teams onboard services self-service — cutting config drift and platform-team ticket load.</li>
-        <li>Built a DevSecOps CI pipeline with SAST, Gitleaks and Trivy as shared reusable stages, shifting source, secret and container scanning left across every consuming repo.</li>
-        <li>Escalation point and SME for deployment failures, Helm templating and Argo CD sync errors across application and platform teams.</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">Argo CD</span><span class="tag">Helm</span><span class="tag">Kubernetes</span>
-        <span class="tag">Trivy</span><span class="tag">Gitleaks</span>
-      </div>
-    </div>
-
-    <div class="job">
-      <h3>DevOps Engineer — GitLab CI/CD &amp; Kubernetes Platform</h3>
-      <div class="co">Deutsche Telekom Digital Labs · Gurgaon</div>
-      <div class="when">Dec 2024 – Sep 2025</div>
-      <ul>
-        <li>Administered and tuned the GitLab Runner fleet at the Linux OS level, resolving contention and resource bottlenecks to materially improve pipeline throughput across shared CI capacity.</li>
-        <li>Planned and executed production Amazon EKS upgrades with minimal downtime — owning workload validation, rollback readiness and service-availability verification end to end.</li>
-        <li>Implemented Istio service mesh with Argo CD canary deployments for progressive delivery, traffic shaping and rapid rollback on production microservices.</li>
-        <li>Led RabbitMQ and Apache NiFi production upgrades with zero-to-minimal downtime, protecting business-critical integration services.</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">GitLab Runner</span><span class="tag">Amazon EKS</span><span class="tag">Istio</span>
-        <span class="tag">Argo CD</span><span class="tag">OWASP ZAP</span>
-      </div>
-    </div>
-
-    <div class="job">
-      <h3>DevOps Specialist — Cloud Platform, IaC &amp; Governance</h3>
-      <div class="co">OpsTree Solutions · Noida</div>
-      <div class="when">Apr 2022 – Dec 2024</div>
-      <ul>
-        <li>Established AWS Control Tower landing zones, Service Control Policies and IAM Identity Center SSO across a multi-account estate — owning access control and account structure, not just build automation.</li>
-        <li>Built Terraform provisioning pipelines driven from GitLab CI/CD, automating repeatable infrastructure delivery across AWS and GCP.</li>
-        <li>Delivered cloud optimisation work that cut spend by 30% while building secure AWS foundations for development and production.</li>
-        <li>Developed reusable Ansible roles with dynamic inventory and Molecule test coverage; automated compliance checks saving ~25 audit hours per month.</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">Control Tower</span><span class="tag">SCPs</span><span class="tag">Terraform</span>
-        <span class="tag">Ansible</span><span class="tag">GKE</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CASE STUDIES ============ -->
-  <section id="work" class="reveal">
-    <h2>Engineering case studies</h2>
-    <p class="lede">Four pieces of work, each as problem → approach → outcome. All from documented production work, not side projects.</p>
-
-    <details class="case">
-      <summary>
-        <span class="case-name">GitOps delivery with Argo CD and App-of-Apps</span>
-        <span class="case-where">Publicis Sapient</span>
-      </summary>
-      <div class="case-body">
-        <h4>Problem</h4>
-        <p>Backend services were promoted across environments manually, so every environment needed its own hand-maintained configuration. That produced drift between environments and a steady stream of tickets into the platform team.</p>
-        <h4>Approach</h4>
-        <p>Standardised promotion on Argo CD and authored reusable Helm charts behind an App-of-Apps structure, so a new service is onboarded by declaring it rather than by hand-configuring each environment.</p>
-        <h4>Outcome</h4>
-        <p>Product teams onboard services self-service. Configuration drift between environments is reduced and platform-team ticket load is lower.</p>
-        <div class="tags">
-          <span class="tag">Argo CD</span><span class="tag">Helm</span><span class="tag">Kubernetes</span><span class="tag">Git</span>
-        </div>
-      </div>
-    </details>
-
-    <details class="case">
-      <summary>
-        <span class="case-name">GitLab Runner fleet tuning</span>
-        <span class="case-where">Deutsche Telekom Digital Labs</span>
-      </summary>
-      <div class="case-body">
-        <h4>Problem</h4>
-        <p>Shared CI capacity was contended. Developers waited on pipelines, and the bottleneck sat below the CI layer — in how runners were provisioned and how the host OS handled concurrent jobs.</p>
-        <h4>Approach</h4>
-        <p>Administered and tuned the GitLab Runner fleet at the Linux OS level, resolving resource contention and bottlenecks rather than simply adding more runners.</p>
-        <h4>Outcome</h4>
-        <p>Materially improved pipeline throughput and reduced developer wait time across shared CI capacity.</p>
-        <div class="tags">
-          <span class="tag">GitLab Runner</span><span class="tag">Linux</span><span class="tag">GitLab CI/CD</span>
-        </div>
-      </div>
-    </details>
-
-    <details class="case">
-      <summary>
-        <span class="case-name">Production EKS upgrades and progressive delivery</span>
-        <span class="case-where">Deutsche Telekom Digital Labs</span>
-      </summary>
-      <div class="case-body">
-        <h4>Problem</h4>
-        <p>Production Kubernetes clusters needed version upgrades without taking down business-critical microservices, and rollouts had no safe intermediate step between deployed and not deployed.</p>
-        <h4>Approach</h4>
-        <p>Planned and executed EKS upgrades end to end — workload and dependency validation, rollback readiness, service-availability verification. Introduced Istio with Argo CD canary deployments so traffic could be shifted gradually and rolled back quickly.</p>
-        <h4>Outcome</h4>
-        <p>Upgrades completed with minimal downtime. Progressive delivery gave production rollouts a safe, reversible path.</p>
-        <div class="tags">
-          <span class="tag">Amazon EKS</span><span class="tag">Istio</span><span class="tag">Argo CD</span>
-        </div>
-      </div>
-    </details>
-
-    <details class="case">
-      <summary>
-        <span class="case-name">Multi-account AWS governance</span>
-        <span class="case-where">OpsTree Solutions</span>
-      </summary>
-      <div class="case-body">
-        <h4>Problem</h4>
-        <p>A multi-account AWS estate needed consistent account structure, access control and guardrails — governance, not just build automation.</p>
-        <h4>Approach</h4>
-        <p>Established Control Tower landing zones, Service Control Policies and AWS SSO federation, and drove Terraform provisioning pipelines from GitLab CI/CD so infrastructure delivery was repeatable across AWS and GCP.</p>
-        <h4>Outcome</h4>
-        <p>Cloud spend reduced by 30%. Compliance automation saved approximately 25 manual audit hours per month.</p>
-        <div class="tags">
-          <span class="tag">Control Tower</span><span class="tag">SCPs</span><span class="tag">AWS SSO</span><span class="tag">Terraform</span>
-        </div>
-      </div>
-    </details>
-  </section>
-
-  <!-- ============ ARCHITECTURE ============ -->
-  <section id="architecture" class="reveal">
+  <section class="reveal">
     <h2>Delivery pipeline I run</h2>
-    <p class="lede">The GitOps flow behind the case studies above — commit to production, with the gates that run on the way.</p>
-
+    <p class="lede">Commit to production, with the gates that run on the way.</p>
     <div class="flow-scroll">
       <ol class="flow">
         <li><b>Git</b><span>Desired state</span></li>
@@ -227,8 +98,7 @@
     <p class="note">Rollback is a git revert — the same path in reverse, not a separate runbook.</p>
   </section>
 
-  <!-- ============ PRINCIPLES ============ -->
-  <section id="principles" class="reveal">
+  <section class="reveal">
     <h2>How I engineer</h2>
     <div class="skills">
       <div class="sk"><h3>Infrastructure as Code</h3><p>If it was clicked in a console, it will drift. Terraform modules and Ansible roles with real test coverage, applied through pipelines rather than laptops.</p></div>
@@ -240,236 +110,33 @@
     </div>
   </section>
 
-  <!-- ============ SKILLS ============ -->
-  <section id="skills" class="reveal">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="sk">
-        <h3>GitLab Platform</h3>
-        <div class="tags"><span class="tag">CI/CD architecture</span><span class="tag">Runner fleet tuning</span><span class="tag">Reusable templates</span><span class="tag">Approval gates</span><span class="tag">Secrets handling</span></div>
-      </div>
-      <div class="sk">
-        <h3>Cloud &amp; Governance</h3>
-        <div class="tags"><span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">GCP / GKE</span><span class="tag">Control Tower</span><span class="tag">SCPs</span><span class="tag">IAM Identity Center</span></div>
-      </div>
-      <div class="sk">
-        <h3>Infrastructure as Code</h3>
-        <div class="tags"><span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Helm</span><span class="tag">Molecule</span></div>
-      </div>
-      <div class="sk">
-        <h3>Kubernetes &amp; GitOps</h3>
-        <div class="tags"><span class="tag">Argo CD</span><span class="tag">App-of-Apps</span><span class="tag">Istio</span><span class="tag">Canary delivery</span><span class="tag">Docker</span></div>
-      </div>
-      <div class="sk">
-        <h3>Security &amp; DevSecOps</h3>
-        <div class="tags"><span class="tag">SAST / DAST</span><span class="tag">Trivy</span><span class="tag">Gitleaks</span><span class="tag">SonarQube</span><span class="tag">OWASP ZAP</span><span class="tag">MobSF</span></div>
-      </div>
-      <div class="sk">
-        <h3>Observability &amp; Languages</h3>
-        <div class="tags"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">ELK</span><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Linux</span></div>
-      </div>
+  <section class="reveal">
+    <h2>Explore</h2>
+    <div class="cards">
+      <a class="card" href="/experience/">
+        <b>Experience &amp; case studies</b>
+        <span>Three roles, four pieces of production work as problem → approach → outcome.</span>
+      </a>
+      <a class="card" href="/blog/">
+        <b>Writing</b>
+        <span>Published articles on Kubernetes scheduling, cert-manager, Argo CD and Prometheus.</span>
+      </a>
+      <a class="card" href="/projects/">
+        <b>Projects</b>
+        <span>Things built outside work, including the AI assistant on this site.</span>
+      </a>
+      <a class="card" href="/contact/">
+        <b>Contact</b>
+        <span>Start a project enquiry, or just say hello.</span>
+      </a>
     </div>
   </section>
-
-  <!-- ============ PROJECTS ============ -->
-  <section id="projects" class="reveal">
-    <h2>Projects</h2>
-    <article class="project">
-      <h3><a href="https://github.com/DevSecOpsSohan/repurpose-ai">repurpose-ai</a></h3>
-      <p>Turns one long-form transcript into a week of platform-native posts — clip picks with hooks, per-network captions, thumbnail copy and a posting schedule. The Zod schema doubles as the model output contract, so the API returns typed data instead of prose to parse.</p>
-      <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Claude API</span><span class="tag">Cloudflare Workers</span></div>
-    </article>
-    <article class="project">
-      <h3><a href="https://github.com/DevSecOpsSohan/portfolio">This site</a></h3>
-      <p>Static assets on Cloudflare Workers with an AI assistant running on Workers AI through an AI binding — no API key in the frontend, no separate AI server, and answers grounded strictly in a structured knowledge base so it can't invent experience.</p>
-      <div class="tags"><span class="tag">Cloudflare Workers</span><span class="tag">Workers AI</span><span class="tag">Vanilla JS</span></div>
-    </article>
-  </section>
-
-  <!-- ============ CERTS ============ -->
-  <section id="certifications" class="reveal">
-    <h2>Certifications &amp; Education</h2>
-    <div class="certs">
-      <div class="cert"><div class="mark">AWS</div><div><b>Solutions Architect – Associate</b><span>Active</span></div></div>
-      <div class="cert"><div class="mark">K8s</div><div><b>Certified Kubernetes Administrator</b><span>Active</span></div></div>
-      <div class="cert"><div class="mark">BSc</div><div><b>Bachelor of Computer Science</b><span>Tilak Maharashtra Vidyapeeth, Pune · 2020–2023</span></div></div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section id="contact" class="reveal">
-    <h2>Contact</h2>
-
-    <div class="contact-grid">
-      <div class="contact-card">
-        <p>Open to remote platform and DevOps roles, available immediately. Also happy to talk about consulting on GitLab platform work, Kubernetes migrations or GitOps.</p>
-        <dl class="contact-list">
-          <dt>Email</dt>
-          <dd><a href="mailto:sohandogra703@gmail.com">sohandogra703@gmail.com</a></dd>
-          <dt>Phone</dt>
-          <dd><a href="tel:+918287332760">+91 82873 32760</a></dd>
-          <dt>Location</dt>
-          <dd>Faridabad, India · open to remote</dd>
-          <dt>Elsewhere</dt>
-          <dd>
-            <a href="https://www.linkedin.com/in/devopsspecialist/">LinkedIn</a> ·
-            <a href="https://github.com/DevSecOpsSohan">GitHub</a>
-          </dd>
-        </dl>
-      </div>
-
-      <form class="enquiry" id="enquiry-form" novalidate>
-        <h3>Start a project enquiry</h3>
-        <p class="form-lede">Tell me what you're working on. You'll get an acknowledgement straight away, and a personal reply within a couple of working days.</p>
-
-        <div class="row">
-          <div class="field">
-            <label for="first_name">First name <span aria-hidden="true">*</span></label>
-            <input id="first_name" name="first_name" type="text" maxlength="80" autocomplete="given-name" required>
-            <small class="err" data-err="first_name"></small>
-          </div>
-          <div class="field">
-            <label for="last_name">Last name <span aria-hidden="true">*</span></label>
-            <input id="last_name" name="last_name" type="text" maxlength="80" autocomplete="family-name" required>
-            <small class="err" data-err="last_name"></small>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="field">
-            <label for="email">Email <span aria-hidden="true">*</span></label>
-            <input id="email" name="email" type="email" maxlength="200" autocomplete="email" required>
-            <small class="err" data-err="email"></small>
-          </div>
-          <div class="field">
-            <label for="phone">Phone <span class="opt">optional</span></label>
-            <input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel">
-            <small class="err" data-err="phone"></small>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="subject">Subject <span class="opt">optional</span></label>
-          <input id="subject" name="subject" type="text" maxlength="140" placeholder="e.g. Kubernetes migration, CI/CD audit, contract role">
-        </div>
-
-        <div class="field">
-          <label for="message">What would you like to discuss? <span aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" rows="5" maxlength="4000" required
-                    placeholder="A sentence or two about the project, timeline and what you need help with."></textarea>
-          <small class="err" data-err="message"></small>
-        </div>
-
-        <!-- Honeypot: hidden from people, tempting to bots. -->
-        <div class="hp" aria-hidden="true">
-          <label for="website">Website</label>
-          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-        </div>
-
-        <button type="submit" id="enquiry-send">Send enquiry</button>
-        <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
-
 </main>
 
   <footer>
     <span>&copy; <span id="year">2026</span> Sohan Dogra · AWS · Kubernetes · Terraform · CI/CD</span>
     <span><a href="https://github.com/DevSecOpsSohan/portfolio">Source on GitHub</a></span>
   </footer>
-
-</div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Sohan Dogra",
-  "jobTitle": "Platform & DevOps Engineer",
-  "email": "mailto:sohandogra703@gmail.com",
-  "telephone": "+918287332760",
-  "url": "https://portfolio.sohandogra703.workers.dev/",
-  "address": { "@type": "PostalAddress", "addressLocality": "Faridabad", "addressCountry": "IN" },
-  "sameAs": [
-    "https://github.com/DevSecOpsSohan",
-    "https://www.linkedin.com/in/devopsspecialist/"
-  ],
-  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Tilak Maharashtra Vidyapeeth, Pune" },
-  "knowsAbout": ["AWS", "Kubernetes", "Amazon EKS", "Terraform", "GitLab CI/CD", "Argo CD", "Istio", "Helm", "Prometheus", "DevSecOps"],
-  "worksFor": { "@type": "Organization", "name": "Publicis Sapient" }
-}
-</script>
-
-<!-- ============ FLOATING AI ASSISTANT ============ -->
-<div class="widget">
-
-  <div class="chat-panel" id="chat-panel" hidden>
-    <div class="chat-head">
-      <div class="chat-id">
-        <span class="bot-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="8" width="16" height="12" rx="3"/>
-            <path d="M12 8V4"/><circle cx="12" cy="3" r="1.4"/>
-            <path d="M9 13v1.5M15 13v1.5"/>
-            <path d="M1.5 13v3M22.5 13v3"/>
-          </svg>
-        </span>
-        <div>
-          <b>Ask Sohan's AI</b>
-          <span>Answers only from documented experience</span>
-        </div>
-      </div>
-      <div class="chat-actions">
-        <button type="button" id="mode-toggle" class="mode-btn" aria-pressed="false">Interview me</button>
-        <button type="button" id="chat-close" class="icon-btn" aria-label="Close assistant">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M18 6 6 18M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation">
-      <div class="msg bot">
-        <p>Ask me about Sohan's experience, the platforms he's run, or how he approaches infrastructure. Or hit Interview me and I'll ask you DevOps questions instead.</p>
-      </div>
-    </div>
-
-    <div class="quick" id="quick">
-      <button type="button">30-second summary</button>
-      <button type="button">AWS experience?</button>
-      <button type="button">Kubernetes work?</button>
-      <button type="button">CI/CD tools?</button>
-      <button type="button">Why interview Sohan?</button>
-    </div>
-
-    <form class="chat-form" id="chat-form">
-      <label for="chat-input" class="sr-only">Your question</label>
-      <input id="chat-input" type="text" autocomplete="off" maxlength="600" placeholder="Ask anything…">
-      <button type="submit" id="chat-send" aria-label="Send">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-        </svg>
-      </button>
-    </form>
-  </div>
-
-  <button id="chat-launcher" class="launcher" aria-expanded="false" aria-controls="chat-panel">
-    <span class="launcher-ico" aria-hidden="true">
-      <svg class="ico-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="4" y="8" width="16" height="12" rx="3"/>
-        <path d="M12 8V4"/><circle cx="12" cy="3" r="1.4"/>
-        <path d="M9 13v1.5M15 13v1.5"/>
-        <path d="M1.5 13v3M22.5 13v3"/>
-      </svg>
-      <svg class="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M18 6 6 18M6 6l12 12"/>
-      </svg>
-    </span>
-    <span class="launcher-label">Ask Sohan's AI</span>
-  </button>
-
 </div>
 
 <script src="/app.js" defer></script>

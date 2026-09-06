@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing | Sohan Dogra</title>
+<meta name="description" content="Published articles by Sohan Dogra on Kubernetes pod priority and preemption, cert-manager and Let's Encrypt, Argo CD and GitOps architecture, and optimising Prometheus memory usage.">
+<link rel="canonical" href="https://portfolio.sohandogra703.workers.dev/blog/">
+<meta property="og:title" content="Writing | Sohan Dogra">
+<meta property="og:description" content="Published articles by Sohan Dogra on Kubernetes pod priority and preemption, cert-manager and Let's Encrypt, Argo CD and GitOps architecture, and optimising Prometheus memory usage.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://portfolio.sohandogra703.workers.dev/blog/">
+<meta property="og:image" content="https://portfolio.sohandogra703.workers.dev/avatar.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0b0d'/><text x='50' y='70' font-family='system-ui,sans-serif' font-size='54' font-weight='700' fill='%234ade80' text-anchor='middle'>SD</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">Sohan Dogra</a>
+    <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/experience/">Experience</a></li>
+        <li><a href="/blog/">Writing</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+<main id="main">
+  <header class="page-head">
+    <h1>Writing</h1>
+    <p class="summary">Published articles on Kubernetes, GitOps and observability — on the OpsTree engineering blog and Medium.</p>
+  </header>
+
+  <section class="reveal">
+    <h2>Articles</h2>
+    <div class="posts">
+      <article class="post">
+        <div class="post-meta">
+          <span class="post-where">OpsTree</span><time datetime="2022-11-22">22 November 2022</time>
+        </div>
+        <h3><a href="https://opstree.com/blog/pod-priority-priority-classamp-preemption/" rel="noopener">Pod Priority, Priority Class, and Preemption</a></h3>
+        <p>How to make sure critical workloads get scheduled ahead of everything else. Covers defining priority classes, the integer priority range, and configuring preemption so higher-priority pods can evict lower-priority ones when a cluster is resource-constrained.</p>
+        <div class="tags"><span class="tag">Kubernetes</span><span class="tag">Scheduling</span></div>
+      </article>
+      <article class="post">
+        <div class="post-meta">
+          <span class="post-where">OpsTree</span><time datetime="2022-09-27">27 September 2022</time>
+        </div>
+        <h3><a href="https://opstree.com/blog/securing-k8s-traffic-with-cert-manager-amp-lets-encrypt/" rel="noopener">Securing Kubernetes Traffic with Cert-Manager &amp; Let's Encrypt</a></h3>
+        <p>Automating TLS certificate issuance and renewal inside a cluster. Walks through installing cert-manager and the Kong ingress controller, then wiring up ClusterIssuers so domain traffic is served over HTTPS without manual certificate handling.</p>
+        <div class="tags"><span class="tag">Kubernetes</span><span class="tag">Security</span><span class="tag">TLS</span></div>
+      </article>
+      <article class="post">
+        <div class="post-meta">
+          <span class="post-where">Medium</span>
+        </div>
+        <h3><a href="https://medium.com/@Sohan_Dogra/why-argo-cd-understanding-gitops-core-architecture-71b2e144dee2" rel="noopener">Why Argo CD? Understanding GitOps Core Architecture</a></h3>
+        <p>On Argo CD and the architecture underneath GitOps delivery.</p>
+        <div class="tags"><span class="tag">Argo CD</span><span class="tag">GitOps</span></div>
+      </article>
+      <article class="post">
+        <div class="post-meta">
+          <span class="post-where">Medium</span>
+        </div>
+        <h3><a href="https://medium.com/@Sohan_Dogra/optimizing-prometheus-dropping-unwanted-metrics-for-better-memory-management-075721f918c8" rel="noopener">Optimizing Prometheus: Dropping Unwanted Metrics for Better Memory Management</a></h3>
+        <p>Cutting Prometheus memory use by dropping metrics you never query.</p>
+        <div class="tags"><span class="tag">Prometheus</span><span class="tag">Observability</span></div>
+      </article>
+    </div>
+
+    <p class="note">
+      All posts on the OpsTree engineering blog:
+      <a href="https://opstree.com/blog/author/sohandogra/" rel="noopener">opstree.com/blog/author/sohandogra</a>
+      · On Medium: <a href="https://medium.com/@Sohan_Dogra" rel="noopener">@Sohan_Dogra</a>
+    </p>
+  </section>
+
+  <nav class="pager" aria-label="Pagination">
+    <a class="prev" href="/experience/">&larr; Experience</a>
+    <a class="next" href="/projects/">Projects &rarr;</a>
+  </nav>
+</main>
+
+  <footer>
+    <span>&copy; <span id="year">2026</span> Sohan Dogra · AWS · Kubernetes · Terraform · CI/CD</span>
+    <span><a href="https://github.com/DevSecOpsSohan/portfolio">Source on GitHub</a></span>
+  </footer>
+</div>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
