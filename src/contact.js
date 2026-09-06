@@ -4,17 +4,24 @@
  * Every submission is written to D1 first, so nothing is lost if email delivery
  * is unconfigured or fails. Email is sent afterwards, best-effort.
  *
- * Email needs a verified sender domain — both Cloudflare's send_email binding
- * and Resend require one. Until a custom domain exists, leave the secrets unset:
- * the form still captures enquiries. Read them with:
+ * To enable notification email — one secret, no domain needed:
+ *
+ *   npx wrangler secret put RESEND_API_KEY
+ *
+ * Sign up at resend.com with sohandogra703@gmail.com. Resend's sandbox sender
+ * (onboarding@resend.dev) delivers only to the account owner's own address, so
+ * the notification to Sohan works immediately while the visitor acknowledgement
+ * returns 403. That 403 is expected and handled, not an error.
+ *
+ * Once a custom domain is verified in Resend, set RESEND_FROM to an address on
+ * it and visitor acknowledgements start working too:
+ *
+ *   npx wrangler secret put RESEND_FROM        # Sohan Dogra <hello@yourdomain.com>
+ *
+ * Read stored enquiries at any time:
  *
  *   npx wrangler d1 execute portfolio-enquiries --remote \
  *     --command "SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 20"
- *
- * To turn email on later:
- *   npx wrangler secret put RESEND_API_KEY     # resend.com, free tier
- *   npx wrangler secret put CONTACT_TO         # where enquiries land
- *   npx wrangler secret put RESEND_FROM        # Sohan Dogra <hello@yourdomain.com>
  */
 
 const LIMITS = {
@@ -27,6 +34,15 @@ const LIMITS = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+// Where enquiry notifications go. Already public on the contact page, so it is
+// a default rather than a secret — only RESEND_API_KEY needs setting.
+const CONTACT_TO = "sohandogra703@gmail.com";
+
+// Resend's sandbox sender. Works with no domain verification, but can only
+// deliver to the Resend account owner's own address. Override RESEND_FROM once
+// a custom domain is verified, and visitor acknowledgements start working too.
+const DEFAULT_FROM = "Sohan Dogra Portfolio <onboarding@resend.dev>";
 
 const TAB = 9;
 const NEWLINE = 10;
@@ -54,7 +70,7 @@ function clean(value, max) {
 }
 
 async function sendViaResend(env, { to, subject, text, replyTo }) {
-  const payload = { from: env.RESEND_FROM, to: [to], subject, text };
+  const payload = { from: env.RESEND_FROM || DEFAULT_FROM, to: [to], subject, text };
   if (replyTo) payload.reply_to = replyTo;
 
   const res = await fetch("https://api.resend.com/emails", {
@@ -181,35 +197,47 @@ export async function handleContact(request, env, rateLimited) {
   }
 
   // 2. Email is best-effort. A delivery failure must not lose a stored enquiry.
-  const canEmail = Boolean(env.RESEND_API_KEY && env.CONTACT_TO && env.RESEND_FROM);
-  let emailed = false;
+  //
+  // The two sends are tracked separately on purpose. Without a verified domain,
+  // Resend allows sending only from onboarding@resend.dev and only to the
+  // account owner's own address — so the notification to Sohan succeeds while
+  // the visitor acknowledgement returns 403. One shared try block would have
+  // let that expected 403 mask a notification that actually went out.
+  let notified = false;
+  let acknowledged = false;
 
-  if (canEmail) {
+  if (env.RESEND_API_KEY) {
     try {
       await sendViaResend(env, {
-        to: env.CONTACT_TO,
+        to: CONTACT_TO,
         subject: `Portfolio enquiry — ${enquiry.first_name} ${enquiry.last_name}`,
         text: notificationText(enquiry),
         replyTo: enquiry.email,
       });
+      notified = true;
+    } catch (err) {
+      console.error(`enquiry #${id} notification failed:`, err?.message ?? err);
+    }
 
+    try {
       await sendViaResend(env, {
         to: enquiry.email,
         subject: "Thanks — I've received your message",
         text: acknowledgementText(enquiry),
       });
-
-      await env.DB.prepare("UPDATE enquiries SET emailed = 1 WHERE id = ?").bind(id).run();
-      emailed = true;
+      acknowledged = true;
     } catch (err) {
-      // Logged, never surfaced. The enquiry is stored either way.
-      console.error("enquiry email failed:", err?.message ?? err);
+      // Expected until a sender domain is verified; not an error worth alarm.
+      console.log(`enquiry #${id} acknowledgement skipped:`, err?.message ?? err);
+    }
+
+    if (notified || acknowledged) {
+      await env.DB.prepare("UPDATE enquiries SET emailed = 1 WHERE id = ?").bind(id).run();
     }
   } else {
-    console.log(
-      `enquiry #${id} stored; email not configured (needs RESEND_API_KEY, CONTACT_TO, RESEND_FROM)`
-    );
+    console.log(`enquiry #${id} stored; RESEND_API_KEY not set, no email attempted`);
   }
 
-  return Response.json({ ok: true, emailed });
+  // The UI only promises the visitor a confirmation when one actually reached them.
+  return Response.json({ ok: true, emailed: acknowledged, notified });
 }
