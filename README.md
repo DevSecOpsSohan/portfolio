@@ -1,53 +1,75 @@
 # portfolio
 
-Personal site for Sohan Dogra — Platform & DevOps Engineer.
+Personal site for Sohan Dogra — Platform & DevOps Engineer, with an AI assistant
+that answers questions about his experience.
 
-Static HTML and CSS. No framework, no build step, no dependencies. Deploys to
-Cloudflare Workers static assets, which stays free at any traffic level because
-static assets consume no Worker CPU.
+**Live:** https://portfolio.sohandogra703.workers.dev
 
-## Content
+## Architecture
 
-Built from the GitLab Platform Engineer CV (Aug 2026). Everything on the page is
-real: three roles, active AWS SAA and CKA certifications, and the measured
-outcomes (30% cloud spend reduction, ~25 audit hours saved monthly).
+```
+Visitor
+   |
+   v
+Cloudflare Worker  (src/index.js)
+   |
+   +-- /api/ask ----> Workers AI binding (env.AI)
+   |                     @cf/google/gemma-4-26b-a4b-it
+   |                     grounded in src/profile.js
+   |
+   +-- everything else --> static assets (env.ASSETS -> public/)
+```
 
-## Two files you still need to add
+No API keys in the frontend. No separate AI server. No OpenAI account.
 
-Both are referenced by the page and will 404 until you drop them in:
+## Cost
 
-| File | Path | Notes |
-|---|---|---|
-| Profile photo | `public/avatar.jpg` | Square crop works best. Without it the page shows an "SD" monogram — it degrades cleanly, so this is optional. |
-| Résumé | `public/Sohan_Dogra_Resume.pdf` | See the privacy note below before adding. |
+Free. Workers AI gives **10,000 Neurons/day** on the Free plan, and the Free plan
+has **no paid overage** — if the allocation runs out the call fails and the page
+shows a fallback message. It cannot generate a bill by accident.
 
-**Privacy note on the résumé.** Your CV PDF contains your phone number. I left
-the phone off the web page deliberately — public phone numbers attract spam and
-recruiter cold-calls — and did not copy the PDF into `public/` for the same
-reason. If you want the résumé downloadable, either accept that, or export a
-version with the phone removed and save it to that path. Your call, not mine.
+Static assets consume no Worker CPU, so the site itself is free at any traffic level.
 
-## Local preview
+## The knowledge base
 
-Open `public/index.html` directly, or serve it the way Cloudflare will:
+`src/profile.js` is the single source of truth. The assistant's system prompt is
+generated from it, so the model can only answer from documented facts. Verified
+behaviours:
+
+- Answers ground in real employers and real outcomes
+- Refuses questions outside the knowledge base ("not covered in Sohan's portfolio")
+- Resists prompt injection attempting to override instructions or leak the prompt
+- Interview mode flips it into asking the visitor DevOps questions
+
+To update site content and assistant knowledge together, edit `src/profile.js`
+(assistant) and `public/index.html` (page).
+
+## Local development
 
 ```bash
 npx wrangler dev
 ```
 
+Note: the AI binding always hits the real Workers AI API, even in local dev —
+it draws from the same daily free allocation.
+
 ## Deploy
 
 ```bash
-npx wrangler login   # once
 npx wrangler deploy
 ```
 
-Lands on `portfolio.<your-subdomain>.workers.dev`. Add a custom domain from the
-Worker's settings in the Cloudflare dashboard — custom domains are free.
+## Files
 
-## Editing
+```
+src/index.js       Worker: routing, validation, rate limiting, AI call
+src/profile.js     Knowledge base + system-prompt text generation
+public/index.html  The page
+public/styles.css  Design system (CSS custom properties at the top)
+public/app.js      Chat client, scroll reveal, avatar fallback
+wrangler.jsonc     Worker config with AI + ASSETS bindings
+```
 
-Everything is in `public/index.html`. Sections in order: hero, experience,
-skills, projects, certifications, contact. Styling is `public/styles.css`,
-driven by CSS custom properties at the top — change `--accent` to restyle the
-whole page.
+## Still to add
+
+- `public/avatar.jpg` — profile photo. Falls back to an "SD" monogram without it.
