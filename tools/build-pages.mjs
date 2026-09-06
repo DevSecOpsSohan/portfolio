@@ -15,6 +15,8 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { ATMOON, AEROHUB, carousel } from "./diagrams.mjs";
+
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://portfolio.sohandogra703.workers.dev";
 
@@ -472,26 +474,7 @@ pages.push({
     <h3 class="sub">Architecture</h3>
     <p class="note">Two availability zones. Every tier is its own subnet with its own NACL and security group, so traffic between tiers is explicitly allowed rather than implicitly reachable.</p>
 
-    <div class="flow-scroll">
-      <div class="tiers">
-        <div class="tier edge">
-          <b>Public subnets — AZ-a · AZ-b</b>
-          <div class="chips"><span>Internet Gateway</span><span>Network Load Balancer</span><span>NAT Gateway per AZ</span></div>
-        </div>
-        <div class="tier">
-          <b>Application subnets</b>
-          <div class="chips"><span>Amazon EKS worker nodes</span><span>Istio service mesh</span><span>Auto Scaling</span></div>
-        </div>
-        <div class="tier">
-          <b>Middleware subnets</b>
-          <div class="chips"><span>RabbitMQ</span><span>Redis</span></div>
-        </div>
-        <div class="tier db">
-          <b>Database subnets</b>
-          <div class="chips"><span>PostgreSQL</span><span>MongoDB</span></div>
-        </div>
-      </div>
-    </div>
+${carousel("atmoon-arch", ATMOON)}
 
     <div class="side-note">
       <b>Management VPC — peered, not shared</b>
@@ -530,73 +513,7 @@ pages.push({
     <h3 class="sub">Organization structure</h3>
     <p class="note">Guardrails are attached at OU level and inherited downward, so a new account arrives governed rather than needing policy reapplied by hand.</p>
 
-    <div class="flow-scroll">
-      <svg class="ou-svg" viewBox="0 0 900 430" role="img" aria-label="AWS Organizations hierarchy: organization root with Core, Security, Infrastructure and workload OUs, each containing accounts">
-        <!-- root -->
-        <rect class="box root" x="250" y="8" width="400" height="58" rx="8"/>
-        <text class="t-title" x="450" y="30" text-anchor="middle">Organization root</text>
-        <text class="t-sub" x="450" y="50" text-anchor="middle">Control Tower · IAM Identity Center · Service Catalog · Billing</text>
-
-        <!-- bus -->
-        <path class="line" d="M450 66 V96 M110 96 H790 M110 96 V126 M337 96 V126 M563 96 V126 M790 96 V126"/>
-
-        <!-- OU row -->
-        <rect class="box ou" x="20" y="126" width="180" height="52" rx="8"/>
-        <text class="t-ou" x="110" y="148" text-anchor="middle">Core OU</text>
-        <text class="t-scp" x="110" y="167" text-anchor="middle">SCP</text>
-
-        <rect class="box ou" x="247" y="126" width="180" height="52" rx="8"/>
-        <text class="t-ou" x="337" y="148" text-anchor="middle">Security OU</text>
-        <text class="t-scp" x="337" y="167" text-anchor="middle">SCP</text>
-
-        <rect class="box ou" x="473" y="126" width="180" height="52" rx="8"/>
-        <text class="t-ou" x="563" y="148" text-anchor="middle">Infrastructure OU</text>
-        <text class="t-scp" x="563" y="167" text-anchor="middle">SCP</text>
-
-        <rect class="box ou" x="700" y="126" width="180" height="52" rx="8"/>
-        <text class="t-ou" x="790" y="148" text-anchor="middle">Workload OUs</text>
-        <text class="t-scp" x="790" y="167" text-anchor="middle">SCP · per vertical</text>
-
-        <!-- drops -->
-        <path class="line" d="M110 178 V206 M337 178 V206 M563 178 V206 M790 178 V206"/>
-
-        <!-- accounts -->
-        <rect class="box acct" x="20" y="206" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="110" y="226" text-anchor="middle">Log Archive account</text>
-        <text class="t-svc" x="110" y="242" text-anchor="middle">CloudTrail · CloudWatch · S3</text>
-
-        <rect class="box acct" x="20" y="262" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="110" y="282" text-anchor="middle">Audit account</text>
-        <text class="t-svc" x="110" y="298" text-anchor="middle">Read-only assurance</text>
-
-        <rect class="box acct" x="247" y="206" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="337" y="226" text-anchor="middle">Security account</text>
-        <text class="t-svc" x="337" y="242" text-anchor="middle">Security Hub · GuardDuty</text>
-
-        <rect class="box acct" x="247" y="262" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="337" y="282" text-anchor="middle">AWS Config</text>
-        <text class="t-svc" x="337" y="298" text-anchor="middle">Org-wide conformance</text>
-
-        <rect class="box acct" x="473" y="206" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="563" y="226" text-anchor="middle">Shared services</text>
-        <text class="t-svc" x="563" y="242" text-anchor="middle">Networking · tooling</text>
-
-        <rect class="box acct" x="700" y="206" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="790" y="226" text-anchor="middle">QA account</text>
-
-        <rect class="box acct" x="700" y="258" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="790" y="278" text-anchor="middle">Performance-test account</text>
-
-        <rect class="box acct prod" x="700" y="310" width="180" height="44" rx="6"/>
-        <text class="t-acct" x="790" y="330" text-anchor="middle">Production account</text>
-        <text class="t-svc" x="790" y="346" text-anchor="middle">EKS · RDS · EC2</text>
-
-        <!-- idp -->
-        <rect class="box idp" x="250" y="368" width="400" height="50" rx="8"/>
-        <text class="t-ou" x="450" y="390" text-anchor="middle">External identity provider &#8594; IAM Identity Center</text>
-        <text class="t-svc" x="450" y="408" text-anchor="middle">SSO into every account · per-account permission sets · no long-lived IAM users</text>
-      </svg>
-    </div>
+${carousel("aerohub-arch", AEROHUB)}
 
     <h3 class="sub">What was delivered</h3>
     <ul class="deliverables">

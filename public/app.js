@@ -297,3 +297,72 @@ if (enquiryForm) {
     }
   });
 }
+
+/* ============================ diagram decks ============================ */
+
+/**
+ * Architecture slide decks on the projects page.
+ *
+ * Slides are plain markup with `hidden` on all but the first, so if this never
+ * runs the reader still sees one complete diagram rather than a broken widget.
+ * Arrow keys work when the deck has focus; a horizontal swipe works on touch.
+ */
+document.querySelectorAll("[data-carousel]").forEach((deck) => {
+  const slides = [...deck.querySelectorAll(".slide")];
+  if (slides.length < 2) return;
+
+  const dots = [...deck.querySelectorAll(".c-dot")];
+  const count = deck.querySelector(".c-count b");
+  let at = 0;
+
+  function show(next) {
+    at = (next + slides.length) % slides.length;
+    slides.forEach((s, i) => (s.hidden = i !== at));
+    dots.forEach((d, i) => d.classList.toggle("on", i === at));
+    if (count) count.textContent = String(at + 1);
+  }
+
+  deck.querySelector(".c-prev").addEventListener("click", () => show(at - 1));
+  deck.querySelector(".c-next").addEventListener("click", () => show(at + 1));
+  dots.forEach((d, i) => d.addEventListener("click", () => show(i)));
+
+  deck.tabIndex = 0;
+  deck.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { show(at - 1); e.preventDefault(); }
+    if (e.key === "ArrowRight") { show(at + 1); e.preventDefault(); }
+  });
+
+  // Swipe. Wide diagrams scroll horizontally inside .slide-art, so only treat a
+  // gesture as a swipe when it is clearly horizontal and started outside that
+  // scroller — otherwise panning a diagram would flip the slide out from under
+  // the reader's finger.
+  let x0 = null;
+  let y0 = null;
+  let fromArt = false;
+
+  deck.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.changedTouches[0];
+      x0 = t.clientX;
+      y0 = t.clientY;
+      fromArt = !!e.target.closest(".slide-art");
+    },
+    { passive: true }
+  );
+
+  deck.addEventListener(
+    "touchend",
+    (e) => {
+      if (x0 === null || fromArt) { x0 = null; return; }
+      const t = e.changedTouches[0];
+      const dx = t.clientX - x0;
+      const dy = t.clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.6) show(at + (dx < 0 ? 1 : -1));
+    },
+    { passive: true }
+  );
+
+  show(0);
+});
