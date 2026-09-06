@@ -823,3 +823,22 @@ svg.arch text { font-family: inherit; }
   .carousel-stage { padding: 12px 12px 4px; }
   .c-count { display: none; }
 }
+
+/* ================= nav brand mark ================= */
+
+nav .brand { display: inline-flex; align-items: center; gap: 10px; }
+.brand-img {
+  width: 32px; height: 32px; flex: none;
+  border-radius: 50%; object-fit: cover; object-position: center 22%;
+  border: 1px solid var(--line-bright);
+}
+.brand-mono {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: .74rem; font-weight: 700; letter-spacing: .04em;
+}
+nav .brand:hover .brand-img { border-color: var(--accent); }
+
+@media (max-width: 380px) {
+  nav .brand span { display: none; }
+}

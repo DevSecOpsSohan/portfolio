@@ -66,7 +66,7 @@ function layout({ path, title, description, body }) {
 
 <nav>
   <div class="wrap">
-    <a href="/" class="brand">Sohan Dogra</a>
+    <a href="/" class="brand"><img src="/avatar.jpg" alt="" class="brand-img" data-photo width="32" height="32"><span>Sohan Dogra</span></a>
     <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
@@ -141,10 +141,10 @@ pages.push({
   description:
     "Platform and DevOps engineer with 4+ years running production GitLab CI/CD, AWS, Kubernetes and Argo CD GitOps at Publicis Sapient, Deutsche Telekom Digital Labs and OpsTree. AWS SAA and CKA certified.",
   body: `  <header>
-    <span class="badge"><span class="dot"></span> Open to remote · Immediate joiner</span>
+    <span class="badge"><span class="dot"></span> Open to remote</span>
 
     <div class="id-row">
-      <img src="/avatar.jpg" alt="Sohan Dogra" class="avatar" id="avatar" width="116" height="116">
+      <img src="/avatar.jpg" alt="Sohan Dogra" class="avatar" id="avatar" data-photo width="116" height="116">
       <div>
         <h1>Sohan Dogra</h1>
         <p class="role">Platform &amp; DevOps Engineer</p>

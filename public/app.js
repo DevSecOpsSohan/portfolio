@@ -17,18 +17,29 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 })();
 
-/* ---------- avatar falls back to initials (home page only) ---------- */
+/* ---------- profile photo falls back to a monogram ---------- */
 
-const avatar = document.getElementById("avatar");
-if (avatar) {
-  avatar.addEventListener("error", () => {
-    const fallback = document.createElement("div");
-    fallback.className = "avatar avatar-fallback";
-    fallback.textContent = "SD";
-    fallback.setAttribute("aria-label", "Sohan Dogra");
-    avatar.replaceWith(fallback);
-  });
+/**
+ * Covers both the nav mark and the home-page portrait.
+ *
+ * This script is deferred, so an image that 404s can finish failing BEFORE the
+ * listener is attached — in which case the error event never fires again and a
+ * broken-image icon sits there permanently. Checking .complete with a zero
+ * naturalWidth catches that already-failed case.
+ */
+function monogramFallback(img) {
+  const mark = document.createElement("span");
+  mark.className = img.classList.contains("avatar") ? "avatar avatar-fallback" : "brand-img brand-mono";
+  mark.textContent = "SD";
+  if (img.alt) mark.setAttribute("aria-label", img.alt);
+  else mark.setAttribute("aria-hidden", "true");
+  img.replaceWith(mark);
 }
+
+document.querySelectorAll("img[data-photo]").forEach((img) => {
+  img.addEventListener("error", () => monogramFallback(img));
+  if (img.complete && img.naturalWidth === 0) monogramFallback(img);
+});
 
 /* ---------- scroll reveal ---------- */
 
